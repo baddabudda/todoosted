@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottombar"
+    app:startDestination="@id/inbox">
+
+    <fragment
+        android:id="@+id/inbox"
+        android:name="com.forgblord.todo_prototype.InboxFragment"
+        android:label="InboxFragment" />
+    <fragment
+        android:id="@+id/today"
+        android:name="com.forgblord.todo_prototype.TodayFragment"
+        android:label="TodayFragment" />
+    <fragment
+        android:id="@+id/track"
+        android:name="com.forgblord.todo_prototype.TrackFragment"
+        android:label="TrackFragment" />
+    <fragment
+        android:id="@+id/browse"
+        android:name="com.forgblord.todo_prototype.BrowseFragment"
+        android:label="BrowseFragment" />
+
+</navigation>

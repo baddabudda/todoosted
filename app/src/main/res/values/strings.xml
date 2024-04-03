@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">todo-prototype</string>
+    <string name="inbox">Inbox</string>
+    <string name="today">Today</string>
+    <string name="track">Track</string>
+    <string name="browse">Browse</string>
+    <string name="settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

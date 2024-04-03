@@ -3,7 +3,55 @@
     <style name="Base.Theme.Todoprototype" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorSecondary">@color/purple_light</item>
+        <item name="android:windowBackground">@color/white_neutral</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBarLayout</item>
+        <item name="popupMenuBackground">@color/white_darkened</item>
     </style>
 
     <style name="Theme.Todoprototype" parent="Base.Theme.Todoprototype" />
+
+    <!-- Active Indicator Styling -->
+    <style name="Widget.App.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/black_alpha20</item>
+    </style>
+
+    <!-- Bottom Navigation Styling -->
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/white_neutral</item>
+        <item name="colorSurfaceContainer">@color/white_darkened</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <!-- Top App Bar Styling -->
+    <style name="Widget.App.AppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">@color/white</item>
+    </style>
+
+<!--    <style name="Widget.App.PopupOverflow" parent="Widget.Material3.PopupMenu.Overflow">-->
+<!--        <item name="android:popupBackground">@color/black</item>-->
+<!--    </style>-->
+
+<!--    <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>-->
+<!--        &lt;!&ndash; text color &ndash;&gt;-->
+<!--        <item name="titleTextColor">@color/black</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeOverlay.App.Toolbar" parent="">-->
+<!--        &lt;!&ndash; icon color &ndash;&gt;-->
+<!--        <item name="colorControlNormal">@color/black</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
