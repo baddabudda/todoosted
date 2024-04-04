@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/inbox"
         android:name="com.forgblord.todo_prototype.InboxFragment"
-        android:label="InboxFragment" />
+        android:label="Inbox" />
     <fragment
         android:id="@+id/today"
         android:name="com.forgblord.todo_prototype.TodayFragment"
-        android:label="TodayFragment" />
+        android:label="Today" />
     <fragment
         android:id="@+id/track"
         android:name="com.forgblord.todo_prototype.TrackFragment"
-        android:label="TrackFragment" />
+        android:label="Track" />
     <fragment
         android:id="@+id/browse"
         android:name="com.forgblord.todo_prototype.BrowseFragment"
-        android:label="BrowseFragment" />
+        android:label="Browse" />
 
 </navigation>

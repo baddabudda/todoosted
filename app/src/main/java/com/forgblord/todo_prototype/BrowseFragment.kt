@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,16 @@ class BrowseFragment: Fragment() {
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(
+            android.R.transition.no_transition
+        )
+
+        enterTransition = animation
+        exitTransition = animation
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
