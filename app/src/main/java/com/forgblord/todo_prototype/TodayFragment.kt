@@ -12,8 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
+import java.util.UUID
 
-class TodayFragment: Fragment() {
+class TodayFragment: Fragment(), TaskListAdapter.OnItemCheckedListener {
     private var _binding: FragmentTodayBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -41,13 +42,19 @@ class TodayFragment: Fragment() {
         binding.rvTodayList.layoutManager = LinearLayoutManager(context)
 
         val tasks = taskListViewModel.getAllDueToday()
-        Log.d("TODAY FRAGMENT", "TASKS: ${tasks[0].toString()}")
-        binding.rvTodayList.adapter = TaskListAdapter(tasks)
+//        for (task in tasks) {
+//            Log.d("TODAY FRAGMENT", "${task.title}")
+//        }
+        binding.rvTodayList.adapter = TaskListAdapter(tasks, this)
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemCheck(id: UUID) {
+        taskListViewModel.removeTaskById(id)
     }
 }

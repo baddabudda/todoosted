@@ -2,6 +2,7 @@ package com.forgblord.todo_prototype
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
+import java.util.UUID
 
-class InboxFragment: Fragment() {
+class InboxFragment: Fragment(), TaskListAdapter.OnItemCheckedListener {
     private var _binding: FragmentInboxBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -36,7 +38,10 @@ class InboxFragment: Fragment() {
         binding.rvInboxList.layoutManager = LinearLayoutManager(context)
 
         val tasks = taskListViewModel.getAllTasks()
-        binding.rvInboxList.adapter = TaskListAdapter(tasks)
+//        for (task in tasks) {
+//            Log.d("INBOX FRAGMENT", "${task.title}")
+//        }
+        binding.rvInboxList.adapter = TaskListAdapter(tasks, this)
 
         return binding.root
     }
@@ -44,5 +49,9 @@ class InboxFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemCheck(id: UUID) {
+        taskListViewModel.removeTaskById(id)
     }
 }

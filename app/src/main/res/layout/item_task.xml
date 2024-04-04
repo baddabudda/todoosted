@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_item_viewgroup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,17 +27,27 @@
         tools:text="@string/dummytask" />
 
     <TextView
+        style="@style/Widget.App.DateDisplay"
         android:id="@+id/task_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="4dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textColor="@color/gray"
-        android:textSize="15sp"
-        app:drawableStartCompat="@drawable/ic_today"
-        app:drawableTint="@color/gray"
+        tools:text="@string/dummydate"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/task_title" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/task_date"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:drawablePadding="4dp"-->
+<!--        android:textAppearance="?attr/textAppearanceListItem"-->
+<!--        android:textColor="@color/gray"-->
+<!--        android:textSize="15sp"-->
+<!--        tools:text="@string/dummydate"-->
+<!--        app:drawableStartCompat="@drawable/ic_today"-->
+<!--        app:drawableTint="@color/gray"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/checkBox"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/task_title" />-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/task_su"-->

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/task_detail_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/dummyproject" />
+
+    <CheckBox
+        android:id="@+id/task_detail_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_detail_project" />
+
+    <TextView
+        android:id="@+id/task_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:textAppearance="?attr/textAppearanceDisplaySmall"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/task_detail_checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/task_detail_project"
+        tools:text="@string/dummytask" />
+
+    <TextView
+        style="@style/Widget.App.DateDisplay"
+        android:id="@+id/task_detail_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/task_detail_title"
+        tools:text="@string/dummydate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
