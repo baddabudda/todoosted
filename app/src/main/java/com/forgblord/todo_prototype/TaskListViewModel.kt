@@ -16,7 +16,7 @@ class TaskListViewModel: ViewModel() {
     private fun generateTasks(): MutableList<Task> {
         val result = mutableListOf<Task>()
 
-        for (i in 0 until 10) {
+        for (i in 0 until 40) {
             val task = Task(
                 id = UUID.randomUUID(),
                 title = "Task #$i",
@@ -33,7 +33,7 @@ class TaskListViewModel: ViewModel() {
         val prob = Random.nextBoolean()
         if (prob) {
             val start_date = GregorianCalendar(2024, 3, 4).timeInMillis
-            val end_date = GregorianCalendar(2024, 3, 6).timeInMillis
+            val end_date = GregorianCalendar(2024, 3, 15).timeInMillis
             val date = Random.nextLong(start_date, end_date)
 
             return Date(date)
@@ -69,5 +69,9 @@ class TaskListViewModel: ViewModel() {
 //        for (task in tasks) {
 //            Log.d("TASKLIST VIEWMODEL", "${task.title}")
 //        }
+    }
+
+    fun getTaskById(id: UUID): Task {
+        return tasks[tasks.indexOf(tasks.find { it.id == id })]
     }
 }

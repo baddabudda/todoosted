@@ -8,18 +8,35 @@
     <fragment
         android:id="@+id/inbox"
         android:name="com.forgblord.todo_prototype.InboxFragment"
-        android:label="Inbox" />
+        android:label="Inbox" >
+        <action
+            android:id="@+id/open_task"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/today"
         android:name="com.forgblord.todo_prototype.TodayFragment"
-        android:label="Today" />
+        android:label="Today" >
+        <action
+            android:id="@+id/open_task"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/track"
         android:name="com.forgblord.todo_prototype.TrackFragment"
-        android:label="Track" />
+        android:label="Track" >
+    </fragment>
     <fragment
         android:id="@+id/browse"
         android:name="com.forgblord.todo_prototype.BrowseFragment"
         android:label="Browse" />
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.forgblord.todo_prototype.TaskDetailFragment"
+        android:label="Task" >
+        <argument
+            android:name="taskId"
+            app:argType="java.util.UUID" />
+    </fragment>
 
 </navigation>

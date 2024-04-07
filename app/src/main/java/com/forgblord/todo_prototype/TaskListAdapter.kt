@@ -14,12 +14,13 @@ import java.util.UUID
 class TaskListAdapter (
     private val tasks: MutableList<Task>,
     private val listener: OnItemCheckedListener,
+    private val onClickedTask: (taskId: UUID) -> Unit,
 ): RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     private var onBind: Boolean = true
     inner class TaskViewHolder (
-        private val binding: ItemTaskBinding
+        private val binding: ItemTaskBinding,
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: Task) {
+        fun bind(task: Task, onClickedTask: (id: UUID) -> Unit) {
             binding.apply {
                 checkBox.isChecked = task.completed
                 taskTitle.text = task.title
@@ -32,8 +33,9 @@ class TaskListAdapter (
                 }
 
                 taskItemViewgroup.setOnClickListener {
-                    Toast.makeText(root.context, "${task.title} selected!", Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(root.context, "${task.title} selected!", Toast.LENGTH_SHORT)
+//                        .show()
+                    onClickedTask(task.id)
                 }
 
                 checkBox.setOnCheckedChangeListener { _, isChecked ->
@@ -60,7 +62,7 @@ class TaskListAdapter (
             Log.d("TASKLIST ADAPTER", "${task.title}")
         }
         onBind = true
-        holder.bind(task)
+        holder.bind(task, onClickedTask)
         onBind = false
     }
 

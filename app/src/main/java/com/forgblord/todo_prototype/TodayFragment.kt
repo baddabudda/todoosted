@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
@@ -45,7 +46,9 @@ class TodayFragment: Fragment(), TaskListAdapter.OnItemCheckedListener {
 //        for (task in tasks) {
 //            Log.d("TODAY FRAGMENT", "${task.title}")
 //        }
-        binding.rvTodayList.adapter = TaskListAdapter(tasks, this)
+        binding.rvTodayList.adapter = TaskListAdapter(tasks, this) { taskId ->
+            findNavController().navigate(TodayFragmentDirections.openTask(taskId))
+        }
         return binding.root
     }
 
