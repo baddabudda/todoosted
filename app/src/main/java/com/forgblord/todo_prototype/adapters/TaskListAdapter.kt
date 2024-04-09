@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.forgblord.todo_prototype.Task
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
+import com.forgblord.todo_prototype.interfaces.TaskInterface
 import java.util.UUID
 
 class TaskListViewHolder (
@@ -24,6 +25,8 @@ class TaskListViewHolder (
                 taskDate.visibility = View.VISIBLE
             }
 
+//            taskItemViewgroup.setOnClickListener {  }
+
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) onCheckListener(bindingAdapterPosition, task.id)
             }
@@ -32,15 +35,15 @@ class TaskListViewHolder (
 }
 
 class TaskListAdapter (
-    private val tasks: MutableList<Task>
+    private val tasks: MutableList<Task>,
+    private val onCheckListener: TaskInterface,
 ): RecyclerView.Adapter<TaskListViewHolder>() {
     private var onBind: Boolean = true
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemTaskBinding.inflate(inflater, parent, false)
-        return TaskListViewHolder(binding) { position: Int, id: UUID ->
-            removeOnceCompleted(position, id)
-        }
+        return TaskListViewHolder(binding) { position: Int, id: UUID -> removeOnceCompleted(position, id) }
     }
 
     override fun getItemCount(): Int {
@@ -57,7 +60,7 @@ class TaskListAdapter (
     private fun removeOnceCompleted(position: Int, id: UUID) {
         if (!onBind) {
             tasks.removeAt(tasks.indexOf(tasks.find{it.id == id}))
-            // oncheck
+            onCheckListener.removeById(id)
             notifyItemRemoved(position)
         }
     }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inbox"
-        android:name="com.forgblord.todo_prototype.fragments.ui.TestFragment"
+        android:name="com.forgblord.todo_prototype.fragments.ui.InboxFragment"
         android:label="Inbox" >
         <action
             android:id="@+id/open_task"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/today"
-        android:name="com.forgblord.todo_prototype.TodayFragment"
+        android:name="com.forgblord.todo_prototype.fragments.ui.TodayFragment"
         android:label="Today" >
         <action
             android:id="@+id/open_task"
