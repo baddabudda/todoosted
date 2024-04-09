@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -25,6 +26,7 @@ abstract class TaskListFragment<VB: ViewBinding> (): Fragment(), TaskInterface {
     abstract val data: MutableList<Task>
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
     abstract val getRecyclerView: (VB) -> RecyclerView
+    abstract val getOnClickNavigation: (id: UUID) -> Unit
 
     protected val taskListViewModel: TaskListViewModel by activityViewModels()
 
@@ -37,7 +39,7 @@ abstract class TaskListFragment<VB: ViewBinding> (): Fragment(), TaskInterface {
 
         val recyclerView = getRecyclerView(binding)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TaskListAdapter(data, this)
+        recyclerView.adapter = TaskListAdapter(data, this, getOnClickNavigation)
 
         return binding.root
     }

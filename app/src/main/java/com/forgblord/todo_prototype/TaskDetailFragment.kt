@@ -71,6 +71,5 @@ class TaskDetailFragment: Fragment() {
 
     private fun onChecked(id: UUID) {
         taskListViewModel.removeTaskById(id)
-        findNavController().popBackStack()
     }
 }

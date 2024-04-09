@@ -1,20 +1,5 @@
 package com.forgblord.todo_prototype
 
-import android.os.Bundle
-import android.transition.TransitionInflater
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
-import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
-import java.util.UUID
-
 //class TodayFragment: Fragment(), TaskListAdapter.OnItemCheckedListener {
 //    private var _binding: FragmentTodayBinding? = null
 //    private val binding
