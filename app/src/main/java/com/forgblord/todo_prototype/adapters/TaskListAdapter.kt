@@ -1,28 +1,65 @@
 package com.forgblord.todo_prototype.adapters
 
+import android.icu.text.DateFormat
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.forgblord.todo_prototype.Task
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
+import java.util.UUID
 
 class TaskListViewHolder (
-    private val binding: ItemTaskBinding
+    private val binding: ItemTaskBinding,
+    private val onCheckListener: (position: Int, id: UUID) -> Unit,
 ): RecyclerView.ViewHolder(binding.root) {
+    fun bind(task: Task) {
+        binding.apply {
+            checkBox.isChecked = task.completed
+            taskTitle.text = task.title
+            taskDate.visibility = View.GONE
 
+            if (task.date != null) {
+                taskDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(task.date)
+                taskDate.visibility = View.VISIBLE
+            }
+
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) onCheckListener(bindingAdapterPosition, task.id)
+            }
+        }
+    }
 }
 
 class TaskListAdapter (
-    private val:
+    private val tasks: MutableList<Task>
 ): RecyclerView.Adapter<TaskListViewHolder>() {
+    private var onBind: Boolean = true
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemTaskBinding.inflate(inflater, parent, false)
+        return TaskListViewHolder(binding) { position: Int, id: UUID ->
+            removeOnceCompleted(position, id)
+        }
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return tasks.size
     }
 
     override fun onBindViewHolder(holder: TaskListViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val task = tasks[position]
+        onBind = true
+        holder.bind(task)
+        onBind = false
+    }
+
+    private fun removeOnceCompleted(position: Int, id: UUID) {
+        if (!onBind) {
+            tasks.removeAt(tasks.indexOf(tasks.find{it.id == id}))
+            // oncheck
+            notifyItemRemoved(position)
+        }
     }
 
 }
