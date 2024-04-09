@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.forgblord.todo_prototype.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -36,15 +37,15 @@ class MainActivity : AppCompatActivity() {
         bottomNavBar.setupWithNavController(navController)
 
         binding.fabAddTask.setOnClickListener {
-            Toast.makeText(
-                applicationContext,
-                "Add task!",
-                Toast.LENGTH_SHORT
-            ).show()
+            navController.navigate(R.id.addTaskFragment)
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    fun getAddButton(): FloatingActionButton {
+        return binding.fabAddTask
     }
 }

@@ -37,6 +37,22 @@
         <argument
             android:name="taskId"
             app:argType="java.util.UUID" />
+        <action
+            android:id="@+id/select_date"
+            app:destination="@id/datePickerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.forgblord.todo_prototype.AddTaskFragment"
+        android:label="addTask" />
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.forgblord.todo_prototype.dialogs.DatePickerFragment"
+        android:label="datePicker"
+        tools:layout="@layout/fragment_date_picker" >
+        <argument
+            android:name="dueDate"
+            app:argType="java.util.Date" />
+    </dialog>
 
 </navigation>

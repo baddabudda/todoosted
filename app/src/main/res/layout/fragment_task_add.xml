@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/task_detail_project"
+        android:id="@+id/task_add_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
@@ -16,34 +16,43 @@
         tools:text="@string/dummyproject" />
 
     <CheckBox
-        android:id="@+id/task_detail_checkbox"
+        android:id="@+id/task_add_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_project" />
+        app:layout_constraintTop_toBottomOf="@+id/task_add_project" />
 
-    <TextView
-        android:id="@+id/task_detail_title"
+    <EditText
+        android:id="@+id/task_add_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="5dp"
         android:gravity="center_vertical"
         android:textAppearance="?attr/textAppearanceDisplaySmall"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/task_detail_checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/task_add_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_project"
-        tools:text="@string/dummytask" />
+        app:layout_constraintStart_toEndOf="@+id/task_add_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/task_add_project"
+        android:hint="@string/dummytask" />
+
+<!--    <TextView-->
+<!--        style="@style/Widget.App.DateDisplay"-->
+<!--        android:id="@+id/task_detail_date"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/task_detail_title"-->
+<!--        tools:text="@string/dummydate" />-->
 
     <Button
-        style="?attr/materialButtonOutlinedStyle"
-        android:id="@+id/task_detail_date"
+        android:id="@+id/task_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_title"
-        app:icon="@drawable/ic_today"
-        tools:text="@string/dummydate" />
+        android:layout_marginTop="40dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_add_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

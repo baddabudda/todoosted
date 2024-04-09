@@ -11,7 +11,7 @@ import kotlin.random.Random
 import kotlin.random.nextLong
 
 class TaskListViewModel: ViewModel() {
-    private val tasks = generateTasks()
+    private val tasks: MutableList<Task> = mutableListOf()
 
     private fun generateTasks(): MutableList<Task> {
         val result = mutableListOf<Task>()
@@ -73,5 +73,16 @@ class TaskListViewModel: ViewModel() {
 
     fun getTaskById(id: UUID): Task {
         return tasks[tasks.indexOf(tasks.find { it.id == id })]
+    }
+
+    fun addTask(title: String) {
+        val task = Task(
+            id = UUID.randomUUID(),
+            title = title,
+            completed = false,
+            date = dateByProb()
+        )
+
+        tasks += task
     }
 }

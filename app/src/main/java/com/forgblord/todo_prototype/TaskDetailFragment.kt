@@ -29,12 +29,6 @@ class TaskDetailFragment: Fragment() {
 
     private val taskListViewModel: TaskListViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        Log.d(TAG, "Task id: ${args.taskId}")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +53,12 @@ class TaskDetailFragment: Fragment() {
                 if (isChecked) {
                     onChecked(task.id)
                 }
+            }
 
+            taskDetailDate.setOnClickListener {
+                findNavController().navigate(
+                    TaskDetailFragmentDirections.selectDate(task.date)
+                )
             }
         }
     }
