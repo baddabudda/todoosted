@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype.fragments.list
+package com.forgblord.todo_prototype.fragments.tasklist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
-import com.forgblord.todo_prototype.fragments.list.adapter.TaskListAdapter
+import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import com.forgblord.todo_prototype.interfaces.TaskInterface
 import java.util.UUID
 

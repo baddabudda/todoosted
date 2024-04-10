@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype.fragments.list.adapter
+package com.forgblord.todo_prototype.fragments.tasklist.adapter
 
 import android.icu.text.DateFormat
 import android.view.LayoutInflater

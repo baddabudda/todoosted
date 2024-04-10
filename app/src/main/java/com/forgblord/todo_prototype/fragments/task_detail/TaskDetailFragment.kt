@@ -42,24 +42,14 @@ class TaskDetailFragment: Fragment() {
             taskDetailProject.text = "Default Project"
             taskDetailTitle.text = task.title
             taskDetailDate.text = if (task.date == null) "Not set"
-                                    else DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
-                                        .format(task.date)
+            else DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
+                .format(task.date)
 
             taskDetailCheckbox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     onChecked(task.id)
                 }
             }
-
-//            taskDetailDate.setOnClickListener {
-//                findNavController().navigate(
-//                    TaskDetailFragmentDirections.selectDate(task.date)
-//                )
-//            }
-        }
-
-        setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { requestKey, bundle ->
-            val newDate = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
         }
     }
 

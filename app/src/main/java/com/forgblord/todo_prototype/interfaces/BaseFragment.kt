@@ -11,13 +11,13 @@ import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 
 abstract class BaseFragment<VB: ViewBinding>: Fragment() {
     private var _binding: VB? = null
+
     protected val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
-    protected val taskListViewModel: TaskListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

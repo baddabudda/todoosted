@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.forgblord.todo_prototype.data.viewmodels.ProjectListViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val taskListViewModel: TaskListViewModel by viewModels()
+    private val projectListViewModel: ProjectListViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

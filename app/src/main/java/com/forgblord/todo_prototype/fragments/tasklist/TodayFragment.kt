@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype.fragments.list
+package com.forgblord.todo_prototype.fragments.tasklist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
