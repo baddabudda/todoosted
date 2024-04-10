@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.fragments.add_task
 
 import android.icu.text.DateFormat
 import android.os.Bundle
@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.forgblord.todo_prototype.MainActivity
+import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
-import com.forgblord.todo_prototype.dialogs.DatePickerFragment
+import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import java.util.Date
 
 class AddTaskFragment : Fragment() {

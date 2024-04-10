@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.fragments.browse
 
 import android.os.Bundle
 import android.transition.TransitionInflater

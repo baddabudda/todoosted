@@ -1,14 +1,13 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.data.viewmodels
 
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import java.time.LocalDate
+import com.forgblord.todo_prototype.data.models.Task
 import java.util.Date
 import java.util.GregorianCalendar
 import java.util.UUID
 import kotlin.random.Random
-import kotlin.random.nextLong
 
 class TaskListViewModel: ViewModel() {
     private val tasks: MutableList<Task> = mutableListOf()

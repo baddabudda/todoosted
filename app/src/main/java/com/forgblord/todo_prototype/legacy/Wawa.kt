@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.legacy
 
 //class TodayFragment: Fragment(), TaskListAdapter.OnItemCheckedListener {
 //    private var _binding: FragmentTodayBinding? = null

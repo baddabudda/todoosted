@@ -1,26 +1,20 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.fragments.task_detail
 
 import android.icu.text.DateFormat
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.Looper
-import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
-import com.forgblord.todo_prototype.dialogs.DatePickerFragment
+import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import java.util.Date
 import java.util.UUID
-
-private const val TAG: String = "TaskDetailFragment"
 
 class TaskDetailFragment: Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()
@@ -48,8 +42,7 @@ class TaskDetailFragment: Fragment() {
             taskDetailProject.text = "Default Project"
             taskDetailTitle.text = task.title
             taskDetailDate.text = if (task.date == null) "Not set"
-                                    else DateFormat
-                                        .getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
+                                    else DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
                                         .format(task.date)
 
             taskDetailCheckbox.setOnCheckedChangeListener { _, isChecked ->

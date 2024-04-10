@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype
+package com.forgblord.todo_prototype.data.models
 
 import java.util.Date
 import java.util.UUID

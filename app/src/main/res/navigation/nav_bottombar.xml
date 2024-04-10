@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inbox"
-        android:name="com.forgblord.todo_prototype.fragments.ui.InboxFragment"
+        android:name="com.forgblord.todo_prototype.fragments.list.InboxFragment"
         android:label="Inbox" >
         <action
             android:id="@+id/open_task"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/today"
-        android:name="com.forgblord.todo_prototype.fragments.ui.TodayFragment"
+        android:name="com.forgblord.todo_prototype.fragments.list.TodayFragment"
         android:label="Today" >
         <action
             android:id="@+id/open_task"
@@ -23,16 +23,16 @@
     </fragment>
     <fragment
         android:id="@+id/track"
-        android:name="com.forgblord.todo_prototype.TrackFragment"
+        android:name="com.forgblord.todo_prototype.fragments.track.TrackFragment"
         android:label="Track" >
     </fragment>
     <fragment
         android:id="@+id/browse"
-        android:name="com.forgblord.todo_prototype.BrowseFragment"
+        android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
         android:label="Browse" />
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.forgblord.todo_prototype.TaskDetailFragment"
+        android:name="com.forgblord.todo_prototype.fragments.task_detail.TaskDetailFragment"
         android:label="Task" >
         <argument
             android:name="taskId"
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.forgblord.todo_prototype.AddTaskFragment"
+        android:name="com.forgblord.todo_prototype.fragments.add_task.AddTaskFragment"
         android:label="addTask">
         <action
             android:id="@+id/select_date"
@@ -48,7 +48,7 @@
     </fragment>
     <dialog
         android:id="@+id/datePickerFragment"
-        android:name="com.forgblord.todo_prototype.dialogs.DatePickerFragment"
+        android:name="com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment"
         android:label="datePicker"
         tools:layout="@layout/fragment_date_picker" >
     </dialog>

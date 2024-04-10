@@ -1,11 +1,11 @@
-package com.forgblord.todo_prototype.adapters
+package com.forgblord.todo_prototype.fragments.list.adapter
 
 import android.icu.text.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.forgblord.todo_prototype.Task
+import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
 import com.forgblord.todo_prototype.interfaces.TaskInterface
 import java.util.UUID
