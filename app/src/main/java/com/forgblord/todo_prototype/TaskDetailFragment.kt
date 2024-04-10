@@ -12,9 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
+import com.forgblord.todo_prototype.dialogs.DatePickerFragment
+import java.util.Date
 import java.util.UUID
 
 private const val TAG: String = "TaskDetailFragment"
@@ -55,11 +58,15 @@ class TaskDetailFragment: Fragment() {
                 }
             }
 
-            taskDetailDate.setOnClickListener {
-                findNavController().navigate(
-                    TaskDetailFragmentDirections.selectDate(task.date)
-                )
-            }
+//            taskDetailDate.setOnClickListener {
+//                findNavController().navigate(
+//                    TaskDetailFragmentDirections.selectDate(task.date)
+//                )
+//            }
+        }
+
+        setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { requestKey, bundle ->
+            val newDate = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
         }
     }
 

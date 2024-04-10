@@ -36,23 +36,23 @@
         app:layout_constraintTop_toBottomOf="@+id/task_add_project"
         android:hint="@string/dummytask" />
 
-<!--    <TextView-->
-<!--        style="@style/Widget.App.DateDisplay"-->
-<!--        android:id="@+id/task_detail_date"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/task_detail_title"-->
-<!--        tools:text="@string/dummydate" />-->
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/task_add_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/task_add_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/task_add_title"
+        tools:text="@string/dummydate" />
 
     <Button
         android:id="@+id/task_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_add_title" />
+        app:layout_constraintTop_toBottomOf="@+id/task_add_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

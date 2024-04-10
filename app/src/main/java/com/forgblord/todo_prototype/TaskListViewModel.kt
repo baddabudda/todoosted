@@ -75,12 +75,12 @@ class TaskListViewModel: ViewModel() {
         return tasks[tasks.indexOf(tasks.find { it.id == id })]
     }
 
-    fun addTask(title: String) {
+    fun addTask(title: String, date: Date?) {
         val task = Task(
             id = UUID.randomUUID(),
             title = title,
             completed = false,
-            date = dateByProb()
+            date = date
         )
 
         tasks += task
