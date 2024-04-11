@@ -5,29 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import com.forgblord.todo_prototype.interfaces.TaskInterface
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.UUID
 
-abstract class TaskListFragment<VB: ViewBinding> (): Fragment(), TaskInterface {
-    private var _binding: VB? = null
-    private val binding
-        get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visible?"
-        }
-
-    abstract val data: MutableList<Task>
+abstract class TaskListFragment<VB: ViewBinding> (): Fragment() {
+//    abstract val data: MutableList<Task>
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
     abstract val getRecyclerView: (VB) -> RecyclerView
     abstract val getOnClickNavigation: (id: UUID) -> Unit
 
-    protected val taskListViewModel: TaskListViewModel by activityViewModels()
+    private var _binding: VB? = null
+    protected val binding
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
+        }
+
+    private val recyclerView = getRecyclerView(binding)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +45,7 @@ abstract class TaskListFragment<VB: ViewBinding> (): Fragment(), TaskInterface {
 
         val recyclerView = getRecyclerView(binding)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TaskListAdapter(data, this, getOnClickNavigation)
+//        recyclerView.adapter = TaskListAdapter(data, this, getOnClickNavigation)
 
         return binding.root
     }
@@ -48,8 +55,8 @@ abstract class TaskListFragment<VB: ViewBinding> (): Fragment(), TaskInterface {
         _binding = null
     }
 
-    override fun removeById(id: UUID) {
+/*    override fun removeById(id: UUID) {
         taskListViewModel.removeTaskById(id)
-    }
+    }*/
 
 }

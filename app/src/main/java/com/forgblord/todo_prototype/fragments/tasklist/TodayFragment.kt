@@ -1,25 +1,60 @@
 package com.forgblord.todo_prototype.fragments.tasklist
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
+import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
+import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
+import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
+import kotlinx.coroutines.launch
 import java.util.UUID
 
-class TodayFragment: TaskListFragment<FragmentTodayBinding>() {
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTodayBinding
-        get() = FragmentTodayBinding::inflate
-    override val getRecyclerView: (FragmentTodayBinding) -> RecyclerView
-        get() = FragmentTodayBinding::rvTodayList
-    override val getOnClickNavigation: (id: UUID) -> Unit
-        get() = { id ->
-            findNavController().navigate(
-                InboxFragmentDirections.openTask(id)
-            )
-
+class TodayFragment: Fragment() {
+    private var _binding: FragmentInboxBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
         }
-    override val data: MutableList<Task>
-        get() = taskListViewModel.getAllDueToday()
+    private val taskListViewModel: TaskViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentInboxBinding.inflate(inflater, container, false)
+        binding.rvInboxList.layoutManager = LinearLayoutManager(context)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                taskListViewModel.dueToday.collect { list ->
+                    binding.rvInboxList.adapter = TaskListAdapter(list)
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

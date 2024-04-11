@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.forgblord.todo_prototype.MainActivity
+import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
+import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import java.util.Date
@@ -22,7 +26,7 @@ class AddTaskFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    val taskListViewModel: TaskListViewModel by activityViewModels()
+    val taskListViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +47,13 @@ class AddTaskFragment : Fragment() {
             taskAddDate.text = "Not set"
 
             taskAddButton.setOnClickListener {
-                val task =
-                taskListViewModel.addTask(binding.taskAddTitle.text.toString(), date)
+                val title = this.taskAddTitle.text.toString()
+                val newTask = Task(
+                    0,
+                    title,
+                    false,
+                    date)
+                taskListViewModel.addTask(newTask)
                 findNavController().popBackStack()
             }
 

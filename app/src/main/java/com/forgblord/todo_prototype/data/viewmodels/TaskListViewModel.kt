@@ -3,14 +3,40 @@ package com.forgblord.todo_prototype.data.viewmodels
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.repository.TaskRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.GregorianCalendar
 import java.util.UUID
 import kotlin.random.Random
 
 class TaskListViewModel: ViewModel() {
-    private val tasks: MutableList<Task> = mutableListOf()
+    private val taskRepository = TaskRepository.get()
+    private val _tasks: MutableStateFlow<List<Task>> =
+        MutableStateFlow(emptyList())
+
+    val tasks: StateFlow<List<Task>>
+        get() = _tasks.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            taskRepository.getAllTasks().collect {
+                _tasks.value = it
+            }
+        }
+    }
+    suspend fun addTask(task: Task) {
+        taskRepository.addTask(task)
+    }
+
+    /*
+    ======= DEPRECATED: MIGRATING TO DATABASE =======
 
     private fun generateTasks(): MutableList<Task> {
         val result = mutableListOf<Task>()
@@ -58,19 +84,11 @@ class TaskListViewModel: ViewModel() {
         return result
     }
 
-    fun removeTaskById(id: UUID) {
-        Log.d("TASKLIST VIEWMODEL", "Removing from $id")
-//        for (task in tasks) {
-//            Log.d("TASKLIST VIEWMODEL", "${task.title}")
-//        }
+    fun removeTaskById(id: Int) {
         tasks.removeAt(tasks.indexOf(tasks.find{it.id == id}))
-        Log.d("TASKLIST VIEWMODEL", "CHANGED LIST")
-//        for (task in tasks) {
-//            Log.d("TASKLIST VIEWMODEL", "${task.title}")
-//        }
     }
 
-    fun getTaskById(id: UUID): Task {
+    fun getTaskById(id: Int): Task {
         return tasks[tasks.indexOf(tasks.find { it.id == id })]
     }
 
@@ -84,4 +102,7 @@ class TaskListViewModel: ViewModel() {
 
         tasks += task
     }
+
+    ======= END OF DEPRICATION ===
+     */
 }

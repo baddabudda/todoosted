@@ -13,13 +13,9 @@ class ProjectListViewModel: ViewModel() {
         Color.parseColor("#4DD0E1"),
         Color.parseColor("#FFD54F")
     )
-    private val projects: MutableList<Project> = generateProjects()
+    private lateinit var projects: MutableList<Project>
 
-    private fun randomColorPicker(): Int { return Random.nextInt(0, 3) }
-
-    private fun generateProjects(): MutableList<Project> {
-        val result = mutableListOf<Project>()
-
+    init {
         for (i in 0 until 3) {
             val project = Project(
                 id=UUID.randomUUID(),
@@ -29,11 +25,11 @@ class ProjectListViewModel: ViewModel() {
 
             Log.d("PROJECT VIEWMODEL", "${project.title}")
 
-            result += project
+            projects += project
         }
-
-        return result
     }
+
+    private fun randomColorPicker(): Int { return Random.nextInt(0, 3) }
 
     fun getAllProjects(): List<Project> {
         return projects.toList()
