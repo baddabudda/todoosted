@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,6 +33,11 @@ class AddTaskFragment : Fragment() {
     ): View? {
         _binding = FragmentTaskAddBinding.inflate(inflater, container, false)
         val fb = (activity as MainActivity).getAddButton().hide()
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().popBackStack()
+        }
+        callback.isEnabled = true
 
         return binding.root
     }

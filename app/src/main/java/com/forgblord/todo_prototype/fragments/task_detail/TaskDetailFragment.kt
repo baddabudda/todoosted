@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +19,9 @@ import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
+import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class TaskDetailFragment: Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()
@@ -40,6 +44,12 @@ class TaskDetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().popBackStack()
+        }
+        callback.isEnabled = true
+
         return binding.root
     }
 
@@ -74,7 +84,14 @@ class TaskDetailFragment: Fragment() {
             }
 
             taskDetailDate.setOnClickListener {
-                TODO("Implement date picker logic!")
+                findNavController().navigate(TaskDetailFragmentDirections.selectDate())
+            }
+
+            setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { _, bundle ->
+                val date = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
+                taskDetailViewModel.updateTask { task: Task ->
+                    task.copy(date=date)
+                }
             }
 
             taskDetailDelete.setOnClickListener {
