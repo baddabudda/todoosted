@@ -1,4 +1,4 @@
-package com.forgblord.todo_prototype.data.viewmodels
+package com.forgblord.todo_prototype.data.viewmodels.legacy
 
 import android.text.format.DateUtils
 import android.util.Log
@@ -17,24 +17,6 @@ import java.util.UUID
 import kotlin.random.Random
 
 class TaskListViewModel: ViewModel() {
-    private val taskRepository = TaskRepository.get()
-    private val _tasks: MutableStateFlow<List<Task>> =
-        MutableStateFlow(emptyList())
-
-    val tasks: StateFlow<List<Task>>
-        get() = _tasks.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            taskRepository.getAllTasks().collect {
-                _tasks.value = it
-            }
-        }
-    }
-    suspend fun addTask(task: Task) {
-        taskRepository.addTask(task)
-    }
-
     /*
     ======= DEPRECATED: MIGRATING TO DATABASE =======
 

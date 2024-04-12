@@ -13,7 +13,7 @@ import java.util.UUID
 class TaskListViewHolder (
     private val binding: ItemTaskBinding,
 ): RecyclerView.ViewHolder(binding.root) {
-    fun bind(task: Task) {
+/*    fun bind(task: Task) {
         binding.apply {
             checkBox.isChecked = task.completed
             taskTitle.text = task.title
@@ -24,9 +24,9 @@ class TaskListViewHolder (
                 taskDate.visibility = View.VISIBLE
             }
         }
-    }
+    }*/
 
-    /*fun bind(task: Task, onTaskClicked: (id: UUID) -> Unit) {
+    fun bind(task: Task, onTaskClicked: (id: Int) -> Unit) {
         binding.apply {
             checkBox.isChecked = task.completed
             taskTitle.text = task.title
@@ -41,17 +41,17 @@ class TaskListViewHolder (
                 onTaskClicked(task.id)
             }
 
-            checkBox.setOnCheckedChangeListener { _, isChecked ->
+            /*checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) onCheckListener(bindingAdapterPosition, task.id)
-            }
+            }*/
         }
-    }*/
+    }
 }
 
 class TaskListAdapter (
     private val tasks: List<Task>,
 //    private val onCheckListener: TaskInterface,
-//    private val onItemClickListener: (id: Int) -> Unit,
+    private val onItemClickListener: (id: Int) -> Unit,
 ): RecyclerView.Adapter<TaskListViewHolder>() {
     private var onBind: Boolean = true
 
@@ -69,7 +69,7 @@ class TaskListAdapter (
     override fun onBindViewHolder(holder: TaskListViewHolder, position: Int) {
         val task = tasks[position]
         onBind = true
-        holder.bind(task)
+        holder.bind(task, onItemClickListener)
 //        holder.bind(task, onItemClickListener)
         onBind = false
     }

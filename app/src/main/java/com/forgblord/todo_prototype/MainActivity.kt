@@ -2,23 +2,19 @@ package com.forgblord.todo_prototype
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.widget.Toolbar
+import android.view.Menu
+import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.forgblord.todo_prototype.data.viewmodels.ProjectListViewModel
-import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private val taskListViewModel: TaskListViewModel by viewModels()
-    private val projectListViewModel: ProjectListViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.inbox, R.id.today, R.id.track, R.id.browse))
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -40,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         binding.fabAddTask.setOnClickListener {
             navController.navigate(R.id.addTaskFragment)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_app_bar, menu)
+        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

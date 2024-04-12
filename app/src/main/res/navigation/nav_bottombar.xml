@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.forgblord.todo_prototype.fragments.add_task.AddTaskFragment"
-        android:label="addTask">
+        android:label="Add New Task">
         <action
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
@@ -49,7 +49,7 @@
     <dialog
         android:id="@+id/datePickerFragment"
         android:name="com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment"
-        android:label="datePicker"
+        android:label="Set Date"
         tools:layout="@layout/fragment_date_picker" >
     </dialog>
 

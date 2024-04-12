@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.forgblord.todo_prototype.MainActivity
 import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
-import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment

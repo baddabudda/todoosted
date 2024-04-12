@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,14 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 class InboxFragment: Fragment()  {
     private var _binding: FragmentInboxBinding? = null
@@ -46,7 +42,9 @@ class InboxFragment: Fragment()  {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 taskListViewModel.taskList.collect { list ->
-                    binding.rvInboxList.adapter = TaskListAdapter(list)
+                    binding.rvInboxList.adapter = TaskListAdapter(list) { taskId ->
+                        findNavController().navigate(InboxFragmentDirections.openTask(taskId))
+                    }
                 }
             }
         }

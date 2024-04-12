@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.forgblord.todo_prototype.data.models.Task
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface TaskDao {
@@ -21,6 +22,6 @@ interface TaskDao {
     @Insert
     suspend fun addTask(task: Task)
 
-    @Query("SELECT * FROM task WHERE date=DATETIME('now')")
+    @Query("SELECT id, title, completed, date FROM task where date(date, 'unixepoch', 'localtime') = date('now', 'localtime')")
     fun getAllDueToday(): Flow<List<Task>>
 }

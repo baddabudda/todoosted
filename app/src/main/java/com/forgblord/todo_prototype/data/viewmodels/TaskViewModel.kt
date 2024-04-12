@@ -1,5 +1,6 @@
 package com.forgblord.todo_prototype.data.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Task
@@ -16,22 +17,23 @@ class TaskViewModel: ViewModel() {
     val taskList: StateFlow<List<Task>>
         get() = _taskList.asStateFlow()
 
-    private val _task: MutableStateFlow<Task?> = MutableStateFlow(null)
-    val task: StateFlow<Task?> = _task.asStateFlow()
-
     private val _dueToday: MutableStateFlow<List<Task>> = MutableStateFlow(emptyList())
-    val dueToday: StateFlow<List<Task>> = _dueToday.asStateFlow()
+    val dueToday: StateFlow<List<Task>>
+        get() = _dueToday.asStateFlow()
 
     init {
         viewModelScope.launch {
             taskRepository.getAllTasks().collect {
                 _taskList.value = it
             }
+        }
 
+        viewModelScope.launch {
             taskRepository.getAllDueToday().collect {
                 _dueToday.value = it
             }
         }
+        Log.d("VIEWMODEL", "INITIALIZED STUFF")
     }
 
     fun addTask(task: Task) {
@@ -40,15 +42,15 @@ class TaskViewModel: ViewModel() {
         }
     }
 
-    fun getAllTasks() {
+/*    fun getAllTasks() {
         viewModelScope.launch {
             taskRepository.getAllTasks()
         }
-    }
+    }*/
 
-    fun getAllDueToday() {
+/*    fun getAllDueToday() {
         viewModelScope.launch {
             taskRepository.getAllDueToday()
         }
-    }
+    }*/
 }

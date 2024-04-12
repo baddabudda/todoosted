@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,16 +15,12 @@ import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
-import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
-import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.UUID
 
 class TaskDetailFragment: Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()
+
     private var _binding: FragmentTaskDetailsBinding? = null
     private val binding
         get() = checkNotNull(_binding) {

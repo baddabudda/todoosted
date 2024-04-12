@@ -5,21 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.forgblord.todo_prototype.R
-import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskListViewModel
-import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
-import com.forgblord.todo_prototype.interfaces.TaskInterface
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import java.util.UUID
 
 abstract class TaskListFragment<VB: ViewBinding> (): Fragment() {
