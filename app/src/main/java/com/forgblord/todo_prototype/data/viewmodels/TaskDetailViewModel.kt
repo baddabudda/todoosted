@@ -36,6 +36,12 @@ class TaskDetailViewModel(
             oldTask?.let { onUpdate(it) }
         }
     }
+
+    fun deleteTask(task: Task) {
+        viewModelScope.launch{
+            taskRepository.deleteTask(task)
+        }
+    }
 }
 
 class TaskDetailViewModelFactory(

@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -21,6 +22,9 @@ interface TaskDao {
 
     @Insert
     suspend fun addTask(task: Task)
+
+    @Delete
+    suspend fun deleteTask(task: Task)
 
     @Query("SELECT id, title, completed, date FROM task where date(date, 'unixepoch', 'localtime') = date('now', 'localtime')")
     fun getAllDueToday(): Flow<List<Task>>

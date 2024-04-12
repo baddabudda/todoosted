@@ -7,18 +7,31 @@
 
     <TextView
         android:id="@+id/task_detail_project"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
         android:paddingHorizontal="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/task_detail_delete"
+        app:layout_constraintEnd_toStartOf="@+id/task_detail_delete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/dummyproject" />
+        tools:text="@string/dummyproject"
+        android:textAppearance="?attr/textAppearanceHeadline5"/>
+
+    <Button
+        android:id="@+id/task_detail_delete"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/task_detail_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_detail_project" />
 
@@ -26,14 +39,14 @@
         android:id="@+id/task_detail_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="5dp"
         android:gravity="center_vertical"
+        android:padding="5dp"
         android:textAppearance="?attr/textAppearanceDisplaySmall"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/task_detail_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_project"
+        app:layout_constraintTop_toTopOf="@+id/task_detail_checkbox"
         tools:text="@string/dummytask" />
 
     <Button
@@ -41,6 +54,7 @@
         android:id="@+id/task_detail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toEndOf="@+id/task_detail_checkbox"
         app:layout_constraintTop_toBottomOf="@+id/task_detail_title"
         app:icon="@drawable/ic_today"

@@ -41,6 +41,10 @@ class TaskRepository private constructor(
         database.taskDao().addTask(task)
     }
 
+    suspend fun deleteTask(task: Task) {
+        database.taskDao().deleteTask(task)
+    }
+
     companion object {
         private var INSTANCE: TaskRepository? = null
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
@@ -30,6 +31,8 @@ class TaskDetailFragment: Fragment() {
     private val taskDetailViewModel: TaskDetailViewModel by viewModels {
         TaskDetailViewModelFactory(args.taskId)
     }
+
+    private var _task: Task? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,12 +72,22 @@ class TaskDetailFragment: Fragment() {
                     oldTask.copy(completed=isChecked)
                 }
             }
+
+            taskDetailDate.setOnClickListener {
+                TODO("Implement date picker logic!")
+            }
+
+            taskDetailDelete.setOnClickListener {
+                _task?.let { it1 -> taskDetailViewModel.deleteTask(it1) }
+                findNavController().popBackStack()
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                taskDetailViewModel.task.collect() { task ->
-                    task?.let { updateUI(it) }
+                taskDetailViewModel.task.collect { flowTask ->
+                    flowTask?.let { updateUI(it) }
+                    _task = flowTask
                 }
             }
         }
