@@ -1,9 +1,12 @@
 package com.forgblord.todo_prototype.data.models
 
-import java.util.UUID
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Project(
-    val id: UUID,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val title: String,
     val colorCode: Int,
 )

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.databinding.ItemProjectBinding
 
-class ProjectListViewHolder (
+class ProjectViewholder (
     private val binding: ItemProjectBinding,
 ): RecyclerView.ViewHolder(binding.root) {
     fun bind(project: Project) {
@@ -19,18 +19,18 @@ class ProjectListViewHolder (
 
 class ProjectListAdapter (
     private val projects: List<Project>
-): RecyclerView.Adapter<ProjectListViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectListViewHolder {
+): RecyclerView.Adapter<ProjectViewholder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewholder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemProjectBinding.inflate(inflater, parent, false)
-        return ProjectListViewHolder(binding)
+        return ProjectViewholder(binding)
     }
 
     override fun getItemCount(): Int {
         return projects.size
     }
 
-    override fun onBindViewHolder(holder: ProjectListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProjectViewholder, position: Int) {
         val project = projects[position]
         holder.bind(project)
     }

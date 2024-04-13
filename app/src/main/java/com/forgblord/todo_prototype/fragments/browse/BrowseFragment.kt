@@ -1,5 +1,6 @@
 package com.forgblord.todo_prototype.fragments.browse
 
+import android.icu.text.DateFormat
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.util.Log
@@ -10,15 +11,30 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.viewmodels.ProjectListViewModel
+import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
 import com.forgblord.todo_prototype.databinding.FragmentBrowseBinding
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.databinding.ItemProjectBinding
 import com.forgblord.todo_prototype.fragments.browse.adapter.ProjectListAdapter
+import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
+import com.forgblord.todo_prototype.fragments.tasklist.InboxFragmentDirections
+import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import com.forgblord.todo_prototype.interfaces.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import java.util.Date
+
+private const val PREDEFINED_CHILDREN_COUNT = 3
 
 class BrowseFragment: Fragment() {
     private var _binding: FragmentBrowseBinding? = null
@@ -27,7 +43,8 @@ class BrowseFragment: Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val projectListViewModel: ProjectListViewModel by activityViewModels()
+//    private val projectListViewModel: ProjectListViewModel by activityViewModels()
+    private val projectViewModel: ProjectViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,18 +52,41 @@ class BrowseFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrowseBinding.inflate(inflater, container, false)
-        val projects = projectListViewModel.getAllProjects()
 
-        for (project in projects) {
+        /*for (project in projects) {
             val projectView = populateProject(project, container)
             binding.tabContainer.addView(projectView)
-        }
+        }*/
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                projectViewModel.projectList.collectLatest { list ->
+                    val curSize = binding.tabContainer.childCount - PREDEFINED_CHILDREN_COUNT
+
+                    for (project in list.slice(curSize until list.size)) {
+                        val projectView = populateProject(project, binding.tabContainer)
+                        binding.tabContainer.addView(projectView)
+                    }
+                }
+            }
+        }
+
+        binding.apply {
+            addProject.setOnClickListener {
+                findNavController().navigate(BrowseFragmentDirections.actionAddProject())
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("BROWSE FRAGMENT", "DESTROYED")
         _binding = null
     }
 

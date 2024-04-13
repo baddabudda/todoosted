@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.repository.TaskRepository
+import com.forgblord.todo_prototype.data.repository.TodoRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,21 +14,21 @@ import kotlinx.coroutines.launch
 class TaskDetailViewModel(
     taskId: Int,
 ): ViewModel() {
-    private val taskRepository = TaskRepository.get()
+    private val todoRepository: TodoRepository = TodoRepository.getInstance()
 
     private val _task: MutableStateFlow<Task?> = MutableStateFlow(null)
     val task: StateFlow<Task?> = _task.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _task.value = taskRepository.getTaskById(taskId)
+            _task.value = todoRepository.getTaskById(taskId)
         }
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        task.value?.let { taskRepository.updateTask(it) }
+        task.value?.let { todoRepository.updateTask(it) }
     }
 
     fun updateTask(onUpdate: (Task) -> Task) {
@@ -39,7 +39,7 @@ class TaskDetailViewModel(
 
     fun deleteTask(task: Task) {
         viewModelScope.launch{
-            taskRepository.deleteTask(task)
+            todoRepository.deleteTask(task)
         }
     }
 }

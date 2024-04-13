@@ -11,6 +11,7 @@
     <string name="projects">My Projects</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_project">Add new project</string>
 
     <string name="dummytask">Dummy task placeholder</string>
     <string name="dummydate">31 Mar 2024</string>

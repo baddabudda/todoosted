@@ -1,20 +1,6 @@
 package com.forgblord.todo_prototype.data.viewmodels.legacy
 
-import android.text.format.DateUtils
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.repository.TaskRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.GregorianCalendar
-import java.util.UUID
-import kotlin.random.Random
 
 class TaskListViewModel: ViewModel() {
     /*

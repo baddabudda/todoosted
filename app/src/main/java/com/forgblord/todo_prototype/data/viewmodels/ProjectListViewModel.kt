@@ -18,7 +18,7 @@ class ProjectListViewModel: ViewModel() {
     init {
         for (i in 0 until 3) {
             val project = Project(
-                id=UUID.randomUUID(),
+                id=Random.nextInt(),
                 title="Project #$i",
                 colorCode=colors[randomColorPicker()]
             )

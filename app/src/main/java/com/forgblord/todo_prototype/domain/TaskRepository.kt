@@ -7,8 +7,8 @@ interface TaskRepository {
     fun getAllTasks(): Flow<List<Task>>
     fun getAllDueToday(): Flow<List<Task>>
 
-    fun getTaskById(id: Int): Task
-    fun addTask(newTask: Task)
-    fun updateTask(updatedTask: Task)
-    fun deleteTask(deletedTask: Task)
+    suspend fun getTaskById(id: Int): Task
+    suspend fun addTask(newTask: Task)
+    suspend fun updateTask(updatedTask: Task)
+    suspend fun deleteTask(deletedTask: Task)
 }

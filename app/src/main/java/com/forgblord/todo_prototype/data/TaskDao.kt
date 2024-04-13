@@ -7,7 +7,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.forgblord.todo_prototype.data.models.Task
 import kotlinx.coroutines.flow.Flow
-import java.util.Date
 
 @Dao
 interface TaskDao {
@@ -15,7 +14,7 @@ interface TaskDao {
     fun getAllTasks(): Flow<List<Task>>
 
     @Query("SELECT * FROM task WHERE id=(:id)")
-    suspend fun getTask(id: Int): Task
+    suspend fun getTaskById(id: Int): Task
 
     @Update
     suspend fun updateTask(task: Task)
