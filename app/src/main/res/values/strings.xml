@@ -12,8 +12,9 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_project">Add new project</string>
+    <string name="add_task">Add new task</string>
 
-    <string name="dummytask">Dummy task placeholder</string>
+    <string name="dummytask">Task name</string>
     <string name="dummydate">31 Mar 2024</string>
     <string name="dummysubtask">0/11</string>
     <string name="dummyproject">Project Name</string>

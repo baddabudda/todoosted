@@ -41,6 +41,12 @@ class TaskViewModel: ViewModel() {
         }
     }
 
+    fun updateTask(task: Task) {
+        viewModelScope.launch {
+            todoRepository.updateTask(task)
+        }
+    }
+
 /*    fun getAllTasks() {
         viewModelScope.launch {
             taskRepository.getAllTasks()

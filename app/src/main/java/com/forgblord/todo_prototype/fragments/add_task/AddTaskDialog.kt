@@ -2,42 +2,35 @@ package com.forgblord.todo_prototype.fragments.add_task
 
 import android.icu.text.DateFormat
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.forgblord.todo_prototype.MainActivity
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
-import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
+import com.forgblord.todo_prototype.databinding.FragmentAddTaskSheetBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Date
 
-class AddTaskFragment : Fragment() {
-    private var _binding: FragmentTaskAddBinding? = null
+class AddTaskDialog: BottomSheetDialogFragment() {
+    private var _binding: FragmentAddTaskSheetBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    val taskListViewModel: TaskViewModel by viewModels()
+    private val taskListViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTaskAddBinding.inflate(inflater, container, false)
-        val fb = (activity as MainActivity).getAddButton().hide()
-
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().popBackStack()
-        }
-        callback.isEnabled = true
+        _binding = FragmentAddTaskSheetBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -47,36 +40,38 @@ class AddTaskFragment : Fragment() {
         var date: Date? = null
 
         binding.apply {
-            taskAddDate.text = "Not set"
-
-            taskAddButton.setOnClickListener {
-                val title = this.taskAddTitle.text.toString()
+            chipDate.text = "Not set"
+            btnAdd.setOnClickListener {
+                val title = this.taskName.text.toString()
                 val newTask = Task(
                     0,
                     title,
                     false,
                     date)
                 taskListViewModel.addTask(newTask)
-                findNavController().popBackStack()
+                dismiss()
             }
 
-            /*taskAddDate.setOnClickListener {
-                findNavController().navigate(AddTaskFragmentDirections.selectDate())
-            }*/
+            btnCancel.setOnClickListener {
+                dismiss()
+            }
+
+            chipDate.setOnClickListener {
+                findNavController().navigate(AddTaskDialogDirections.selectDate())
+            }
         }
 
-        /*setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { _, bundle ->
+        setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { _, bundle ->
             date = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
 
             if (date != null) {
-                binding.taskAddDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(date)
+                binding.chipDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(date)
             }
-        }*/
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val fb = (activity as MainActivity).getAddButton().show()
         _binding = null
     }
 }

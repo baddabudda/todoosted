@@ -49,8 +49,8 @@ class AddProjectFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            add.setOnClickListener {
-                val title = this.projectTitle.text.toString()
+            btnAdd.setOnClickListener {
+                val title = this.projectName.text.toString()
                 val newProject = Project(
                     id=0,
                     title=title,
@@ -61,7 +61,7 @@ class AddProjectFragment : BottomSheetDialogFragment() {
                 dismiss()
             }
 
-            cancel.setOnClickListener {
+            btnCancel.setOnClickListener {
                 dismiss()
             }
         }

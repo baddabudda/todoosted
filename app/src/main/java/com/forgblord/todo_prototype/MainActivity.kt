@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavBar.setupWithNavController(navController)
 
         binding.fabAddTask.setOnClickListener {
-            navController.navigate(R.id.addTaskFragment)
+            navController.navigate(R.id.addTaskDialog)
         }
     }
 

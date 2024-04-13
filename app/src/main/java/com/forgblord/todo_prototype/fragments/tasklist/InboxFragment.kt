@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.R
+import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
@@ -42,12 +43,17 @@ class InboxFragment: Fragment()  {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 taskListViewModel.taskList.collect { list ->
-                    binding.rvInboxList.adapter = TaskListAdapter(list) { taskId ->
-                        findNavController().navigate(InboxFragmentDirections.openTask(taskId))
-                    }
+                    binding.rvInboxList.adapter = TaskListAdapter(list,
+                        {task -> updateOnCheck(task)},
+                        { taskId -> findNavController().navigate(InboxFragmentDirections.openTask(taskId)) }
+                    )
                 }
             }
         }
+    }
+
+    private fun updateOnCheck(task: Task) {
+        taskListViewModel.updateTask(task)
     }
 
     override fun onDestroyView() {

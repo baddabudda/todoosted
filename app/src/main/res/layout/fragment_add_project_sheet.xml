@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.browse.AddProjectFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background">
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/project_title"
+            android:id="@+id/project_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dummyproject"/>
@@ -36,14 +37,14 @@
 
         <Button
             style="@style/Widget.Material3.Button.TextButton"
-            android:id="@+id/add"
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"/>
 
         <Button
             style="@style/Widget.Material3.Button.TextButton"
-            android:id="@+id/cancel"
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"/>
