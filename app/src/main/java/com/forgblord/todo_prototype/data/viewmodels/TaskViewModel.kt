@@ -17,11 +17,11 @@ class TaskViewModel: ViewModel() {
     val taskList: StateFlow<List<Task>>
         get() = _taskList.asStateFlow()
 
-    private val _dueToday: MutableStateFlow<List<Task>> = MutableStateFlow(emptyList())
+    /*private val _dueToday: MutableStateFlow<List<Task>> = MutableStateFlow(emptyList())
     val dueToday: StateFlow<List<Task>>
-        get() = _dueToday.asStateFlow()
+        get() = _dueToday.asStateFlow()*/
 
-    init {
+    /*init {
         viewModelScope.launch {
             todoRepository.getAllTasks().collect {
                 _taskList.value = it
@@ -31,6 +31,30 @@ class TaskViewModel: ViewModel() {
         viewModelScope.launch {
             todoRepository.getAllDueToday().collect {
                 _dueToday.value = it
+            }
+        }
+    }*/
+
+    fun getAllTasks() {
+        viewModelScope.launch {
+            todoRepository.getAllTasks().collect {
+                _taskList.value = it
+            }
+        }
+    }
+
+    fun getAllDueToday() {
+        viewModelScope.launch {
+            todoRepository.getAllDueToday().collect {
+                _taskList.value = it
+            }
+        }
+    }
+
+    fun getAllByProjectId() {
+        viewModelScope.launch {
+            todoRepository.getAllTasks().collect {
+                _taskList.value = it
             }
         }
     }
@@ -46,16 +70,4 @@ class TaskViewModel: ViewModel() {
             todoRepository.updateTask(task)
         }
     }
-
-/*    fun getAllTasks() {
-        viewModelScope.launch {
-            taskRepository.getAllTasks()
-        }
-    }*/
-
-/*    fun getAllDueToday() {
-        viewModelScope.launch {
-            taskRepository.getAllDueToday()
-        }
-    }*/
 }

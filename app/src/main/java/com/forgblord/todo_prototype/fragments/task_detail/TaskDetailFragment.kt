@@ -20,6 +20,7 @@ import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
+import com.forgblord.todo_prototype.utils.popOnBackPress
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -38,17 +39,17 @@ class TaskDetailFragment: Fragment() {
 
     private var _task: Task? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        popOnBackPress(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
-
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().popBackStack()
-        }
-        callback.isEnabled = true
 
         return binding.root
     }

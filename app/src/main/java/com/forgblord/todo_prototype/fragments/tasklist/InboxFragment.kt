@@ -18,6 +18,18 @@ import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import kotlinx.coroutines.launch
 
+class InboxFragment: TaskListFragment() {
+    override fun openTask(taskId: Int) {
+        findNavController().navigate(InboxFragmentDirections.openTask(taskId))
+    }
+
+    override fun initializeList() {
+        taskListViewModel.getAllTasks()
+    }
+
+}
+
+/*
 class InboxFragment: Fragment()  {
     private var _binding: FragmentInboxBinding? = null
     private val binding
@@ -60,4 +72,4 @@ class InboxFragment: Fragment()  {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/

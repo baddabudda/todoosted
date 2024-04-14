@@ -87,6 +87,10 @@ class BrowseFragment: Fragment() {
         val projectIcon: ImageView = inflater.findViewById(R.id.project_color)
         projectIcon.setColorFilter(project.colorCode)
 
+        inflater.rootView.setOnClickListener {
+            findNavController().navigate(BrowseFragmentDirections.openProject(project.id, project.title))
+        }
+
         return inflater
     }
 }

@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_add_project"
             app:destination="@id/addProjectFragment" />
+        <action
+            android:id="@+id/open_project"
+            app:destination="@id/project" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
@@ -67,5 +70,19 @@
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/project"
+        android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
+        android:label="ProjectFragment" >
+        <action
+            android:id="@+id/open_task"
+            app:destination="@id/taskDetailFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <argument
+            android:name="projectTitle"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

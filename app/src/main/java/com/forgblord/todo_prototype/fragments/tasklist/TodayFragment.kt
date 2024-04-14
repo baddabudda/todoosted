@@ -18,6 +18,18 @@ import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import kotlinx.coroutines.launch
 
+class TodayFragment: TaskListFragment() {
+    override fun openTask(taskId: Int) {
+        findNavController().navigate(TodayFragmentDirections.openTask(taskId))
+    }
+
+    override fun initializeList() {
+        taskListViewModel.getAllDueToday()
+    }
+
+}
+
+/*
 class TodayFragment: Fragment() {
     private var _binding: FragmentTodayBinding? = null
     private val binding
@@ -60,4 +72,4 @@ class TodayFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/
