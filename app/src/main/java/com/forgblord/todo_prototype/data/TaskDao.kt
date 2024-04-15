@@ -27,4 +27,7 @@ interface TaskDao {
 
     @Query("SELECT id, title, completed, date FROM task where date(date, 'unixepoch', 'localtime') = date('now', 'localtime')")
     fun getAllDueToday(): Flow<List<Task>>
+
+    @Query("SELECT * FROM task WHERE completed=1")
+    fun getCompleted(): Flow<List<Task>>
 }

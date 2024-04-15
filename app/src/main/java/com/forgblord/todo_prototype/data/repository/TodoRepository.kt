@@ -64,6 +64,8 @@ class TodoRepository private constructor(
         taskDao.deleteTask(task)
     }
 
+    fun getCompleted(): Flow<List<Task>> = taskDao.getCompleted()
+
     fun getAllProjects(): Flow<List<Project>> = projectDao.getAllProjects()
 
     suspend fun addProject(project: Project) {

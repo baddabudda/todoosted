@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.forgblord.todo_prototype.NavBottombarDirections
 import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class TodayFragment: TaskListFragment() {
     override fun openTask(taskId: Int) {
-        findNavController().navigate(TodayFragmentDirections.openTask(taskId))
+        findNavController().navigate(NavBottombarDirections.openTask(taskId))
     }
 
     override fun initializeList() {

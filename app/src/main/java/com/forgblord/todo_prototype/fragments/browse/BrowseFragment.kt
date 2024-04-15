@@ -38,11 +38,9 @@ class BrowseFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrowseBinding.inflate(inflater, container, false)
+        Log.d("BROWSE", "VIEW HAS BEEN CREATED")
 
-        /*for (project in projects) {
-            val projectView = populateProject(project, container)
-            binding.tabContainer.addView(projectView)
-        }*/
+        setupDefaultTabNavigation()
 
         return binding.root
     }
@@ -67,7 +65,7 @@ class BrowseFragment: Fragment() {
 
         binding.apply {
             addProject.setOnClickListener {
-                findNavController().navigate(BrowseFragmentDirections.actionAddProject())
+                findNavController().navigate(R.id.action_browse_to_project)
             }
         }
     }
@@ -78,7 +76,7 @@ class BrowseFragment: Fragment() {
         _binding = null
     }
 
-    fun populateProject(project: Project, parent: ViewGroup?): View {
+    private fun populateProject(project: Project, parent: ViewGroup?): View {
         val inflater = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
 
         val projectTitle: TextView = inflater.findViewById(R.id.project_title)
@@ -88,9 +86,15 @@ class BrowseFragment: Fragment() {
         projectIcon.setColorFilter(project.colorCode)
 
         inflater.rootView.setOnClickListener {
-            findNavController().navigate(BrowseFragmentDirections.openProject(project.id, project.title))
+            findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project.id, project.title))
         }
 
         return inflater
+    }
+
+    private fun setupDefaultTabNavigation() {
+        binding.completed.setOnClickListener {
+            findNavController().navigate(BrowseFragmentDirections.actionBrowseToCompleted())
+        }
     }
 }

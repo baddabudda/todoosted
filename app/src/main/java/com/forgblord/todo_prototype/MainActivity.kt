@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -26,14 +27,18 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.inbox, R.id.today, R.id.track, R.id.browse, R.id.project))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.inbox, R.id.today, R.id.track, R.id.browse))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavBar.setupWithNavController(navController)
 
+        bottomNavBar.setOnItemReselectedListener { item ->
+            navController.popBackStack()
+        }
+
         binding.fabAddTask.setOnClickListener {
-            navController.navigate(R.id.addTaskDialog)
+            navController.navigate(R.id.add_task)
         }
     }
 

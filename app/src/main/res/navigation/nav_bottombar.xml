@@ -3,40 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_bottombar"
-    app:startDestination="@id/inbox">
+    app:startDestination="@+id/inbox">
 
-    <fragment
-        android:id="@+id/inbox"
-        android:name="com.forgblord.todo_prototype.fragments.tasklist.InboxFragment"
-        android:label="Inbox" >
-        <action
-            android:id="@+id/open_task"
-            app:destination="@id/taskDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/today"
-        android:name="com.forgblord.todo_prototype.fragments.tasklist.TodayFragment"
-        android:label="Today" >
-        <action
-            android:id="@+id/open_task"
-            app:destination="@id/taskDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/track"
-        android:name="com.forgblord.todo_prototype.fragments.track.TrackFragment"
-        android:label="Track" >
-    </fragment>
-    <fragment
-        android:id="@+id/browse"
-        android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
-        android:label="Browse" >
-        <action
-            android:id="@+id/action_add_project"
-            app:destination="@id/addProjectFragment" />
-        <action
-            android:id="@+id/open_project"
-            app:destination="@id/project" />
-    </fragment>
+    <action
+        android:id="@+id/open_task"
+        app:destination="@id/taskDetailFragment" />
+
+    <action
+        android:id="@+id/add_task"
+        app:destination="@id/addTaskDialog"/>
+
+    <include app:graph="@navigation/nav_inbox"/>
+    <include app:graph="@navigation/nav_today"/>
+    <include app:graph="@navigation/nav_track"/>
+    <include app:graph="@navigation/nav_browse"/>
+
     <fragment
         android:id="@+id/taskDetailFragment"
         android:name="com.forgblord.todo_prototype.fragments.task_detail.TaskDetailFragment"
@@ -57,12 +38,6 @@
     </dialog>
 
     <dialog
-        android:id="@+id/addProjectFragment"
-        android:name="com.forgblord.todo_prototype.fragments.browse.AddProjectFragment"
-        android:label="Add Project"
-        tools:layout="@layout/fragment_add_project_sheet" />
-
-    <dialog
         android:id="@+id/addTaskDialog"
         android:name="com.forgblord.todo_prototype.fragments.add_task.AddTaskDialog"
         android:label="AddTaskDialog" >
@@ -70,19 +45,5 @@
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
     </dialog>
-    <fragment
-        android:id="@+id/project"
-        android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
-        android:label="ProjectFragment" >
-        <action
-            android:id="@+id/open_task"
-            app:destination="@id/taskDetailFragment" />
-        <argument
-            android:name="projectId"
-            app:argType="integer" />
-        <argument
-            android:name="projectTitle"
-            app:argType="string" />
-    </fragment>
 
 </navigation>

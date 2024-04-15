@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/track"
+    app:startDestination="@+id/trackFragment">
+
+    <fragment
+        android:id="@+id/trackFragment"
+        android:name="com.forgblord.todo_prototype.fragments.track.TrackFragment"
+        android:label="TrackFragment" />
+</navigation>

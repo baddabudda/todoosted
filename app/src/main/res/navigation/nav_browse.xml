@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/browse"
+    app:startDestination="@+id/browseFragment">
+
+    <fragment
+        android:id="@+id/browseFragment"
+        android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
+        android:label="BrowseFragment" >
+        <action
+            android:id="@+id/action_browse_to_project"
+            app:destination="@id/projectFragment"
+            app:popUpTo="@id/browseFragment" />
+        <action
+            android:id="@+id/action_browse_to_completed"
+            app:destination="@id/completedFragment"
+            app:popUpTo="@id/browseFragment" />
+        <action
+            android:id="@+id/action_browse_to_addProject"
+            app:destination="@id/addProjectFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
+        android:label="ProjectFragment" >
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <argument
+            android:name="projectTitle"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/completedFragment"
+        android:name="com.forgblord.todo_prototype.fragments.tasklist.CompletedFragment"
+        android:label="CompletedFragment" />
+
+    <dialog
+        android:id="@+id/addProjectFragment"
+        android:name="com.forgblord.todo_prototype.fragments.browse.AddProjectFragment"
+        android:label="Add Project" />
+
+</navigation>

@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype.fragments.tasklist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,6 +68,7 @@ abstract class TaskListFragment: Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("LIST", "VIEW HAS BEEN DESTROYED")
         _binding = null
     }
 }

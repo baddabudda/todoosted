@@ -59,6 +59,14 @@ class TaskViewModel: ViewModel() {
         }
     }
 
+    fun getAllCompleted() {
+        viewModelScope.launch {
+            todoRepository.getCompleted().collect {
+                _taskList.value = it
+            }
+        }
+    }
+
     fun addTask(task: Task) {
         viewModelScope.launch {
             todoRepository.addTask(task)
