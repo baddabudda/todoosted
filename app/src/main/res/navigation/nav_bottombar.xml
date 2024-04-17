@@ -28,6 +28,9 @@
         <action
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/action_taskDetail_to_projectPicker"
+            app:destination="@id/projectPickerDialog" />
     </fragment>
 
     <dialog
@@ -44,6 +47,14 @@
         <action
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/action_addTask_to_projectPicker"
+            app:destination="@id/projectPickerDialog" />
     </dialog>
+
+    <dialog
+        android:id="@+id/projectPickerDialog"
+        android:name="com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog"
+        android:label="ProjectPickerDialog" />
 
 </navigation>

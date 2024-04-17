@@ -3,8 +3,9 @@ package com.forgblord.todo_prototype.data.viewmodels
 import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Project
-import java.util.UUID
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class ProjectListViewModel: ViewModel() {
@@ -18,7 +19,7 @@ class ProjectListViewModel: ViewModel() {
     init {
         for (i in 0 until 3) {
             val project = Project(
-                id=Random.nextInt(),
+                project_id=Random.nextInt(),
                 title="Project #$i",
                 colorCode=colors[randomColorPicker()]
             )

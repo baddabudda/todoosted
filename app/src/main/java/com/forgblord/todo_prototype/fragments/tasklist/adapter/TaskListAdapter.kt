@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
-import com.forgblord.todo_prototype.interfaces.TaskInterface
-import java.util.UUID
 
 class TaskListViewHolder (
     private val binding: ItemTaskBinding,
@@ -32,6 +30,11 @@ class TaskListViewHolder (
         binding.apply {
             taskTitle.text = task.title
             taskDate.visibility = View.GONE
+            taskProject.text = "Inbox"
+
+            if (task.proj_id != null) {
+                taskProject.text = task.proj_id.toString()
+            }
 
             if (task.date != null) {
                 taskDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(task.date)
@@ -44,7 +47,7 @@ class TaskListViewHolder (
             }
 
             taskItemViewgroup.setOnClickListener {
-                onTaskClicked(task.id)
+                onTaskClicked(task.task_id)
             }
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->

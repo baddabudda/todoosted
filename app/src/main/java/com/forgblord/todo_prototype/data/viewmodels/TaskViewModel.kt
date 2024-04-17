@@ -51,10 +51,11 @@ class TaskViewModel: ViewModel() {
         }
     }
 
-    fun getAllByProjectId() {
+    fun getAllByProjectId(id: Int) {
         viewModelScope.launch {
-            todoRepository.getAllTasks().collect {
-                _taskList.value = it
+            todoRepository.getAllTasksByProjectId(id).collect {
+                Log.d("VIEWMODEL", "${it.tasks}")
+                _taskList.value = it.tasks
             }
         }
     }

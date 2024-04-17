@@ -2,19 +2,13 @@ package com.forgblord.todo_prototype.fragments.browse
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
 import com.forgblord.todo_prototype.databinding.FragmentAddProjectSheetBinding
-import com.forgblord.todo_prototype.databinding.FragmentBrowseBinding
-import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlin.random.Random
 
@@ -52,7 +46,7 @@ class AddProjectFragment : BottomSheetDialogFragment() {
             btnAdd.setOnClickListener {
                 val title = this.projectName.text.toString()
                 val newProject = Project(
-                    id=0,
+                    project_id=0,
                     title=title,
                     colorCode=colors[randomColorPicker()]
                 )

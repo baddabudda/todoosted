@@ -4,6 +4,7 @@ import com.forgblord.todo_prototype.data.ProjectDao
 import com.forgblord.todo_prototype.data.TaskDao
 import com.forgblord.todo_prototype.data.TodoDatabase
 import com.forgblord.todo_prototype.data.models.Project
+import com.forgblord.todo_prototype.data.models.ProjectAndTasks
 import com.forgblord.todo_prototype.data.models.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -70,6 +71,12 @@ class TodoRepository private constructor(
 
     suspend fun addProject(project: Project) {
         projectDao.addProject(project)
+    }
+
+    fun getAllTasksByProjectId(id: Int): Flow<ProjectAndTasks> = taskDao.getAllTasksByProjectId(id)
+
+    suspend fun deleteProject(project: Project) {
+        projectDao.deleteProject(project)
     }
 
 }

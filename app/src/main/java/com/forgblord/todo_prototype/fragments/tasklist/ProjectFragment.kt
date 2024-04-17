@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype.fragments.tasklist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.NavBottombarDirections
@@ -20,6 +21,7 @@ class ProjectFragment: TaskListFragment() {
     }
 
     override fun initializeList() {
-        taskListViewModel.getAllByProjectId()
+        Log.d("PROJECT", "${args.projectId}")
+        taskListViewModel.getAllByProjectId(args.projectId)
     }
 }

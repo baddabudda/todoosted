@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.forgblord.todo_prototype.data.models.Project
+import com.forgblord.todo_prototype.data.models.ProjectAndTasks
 import com.forgblord.todo_prototype.data.models.Task
 import java.lang.IllegalStateException
 
-@Database(entities = [Task::class, Project::class], version=2)
+@Database(entities = [Task::class, Project::class], version=4)
 @TypeConverters(TaskTypeConverter::class)
 abstract class TodoDatabase: RoomDatabase() {
     abstract fun taskDao(): TaskDao

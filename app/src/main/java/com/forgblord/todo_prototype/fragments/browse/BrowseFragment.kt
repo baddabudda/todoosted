@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -54,9 +55,10 @@ class BrowseFragment: Fragment() {
                     val curSize = binding.tabContainer.childCount - PREDEFINED_CHILDREN_COUNT
                     Log.d("BROWSE", curSize.toString())
                     Log.d("BROWSE", list.size.toString())
+//                    Log.d("BROWSE", "CHANGE ENCOUNTERED!")
 
                     for (project in list.slice(curSize until list.size)) {
-                        val projectView = populateProject(project, binding.tabContainer)
+                        val projectView = inflateProject(project, binding.tabContainer)
                         binding.tabContainer.addView(projectView)
                     }
                 }
@@ -65,7 +67,7 @@ class BrowseFragment: Fragment() {
 
         binding.apply {
             addProject.setOnClickListener {
-                findNavController().navigate(R.id.action_browse_to_project)
+                findNavController().navigate(R.id.action_browse_to_addProject)
             }
         }
     }
@@ -76,7 +78,7 @@ class BrowseFragment: Fragment() {
         _binding = null
     }
 
-    private fun populateProject(project: Project, parent: ViewGroup?): View {
+    private fun inflateProject(project: Project, parent: ViewGroup?): View {
         val inflater = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
 
         val projectTitle: TextView = inflater.findViewById(R.id.project_title)
@@ -85,8 +87,14 @@ class BrowseFragment: Fragment() {
         val projectIcon: ImageView = inflater.findViewById(R.id.project_color)
         projectIcon.setColorFilter(project.colorCode)
 
+        val projectDelete: Button = inflater.findViewById(R.id.btn_delete)
+        projectDelete.setOnClickListener {
+            projectViewModel.deleteProject(project)
+            binding.tabContainer.removeView(inflater)
+        }
+
         inflater.rootView.setOnClickListener {
-            findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project.id, project.title))
+            findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project.project_id, project.title))
         }
 
         return inflater

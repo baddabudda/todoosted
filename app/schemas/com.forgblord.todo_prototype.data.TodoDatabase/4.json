@@ -1,18 +1,24 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-    "identityHash": "eef83ab7da8a2d1ab6b80f1cbf675b0d",
+    "version": 4,
+    "identityHash": "19aa36475d789fe8acae80d3dad44ce2",
     "entities": [
       {
         "tableName": "Task",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`task_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` INTEGER, FOREIGN KEY(`task_id`) REFERENCES `Project`(`project_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`task_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `proj_id` INTEGER, `title` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` INTEGER, FOREIGN KEY(`proj_id`) REFERENCES `Project`(`project_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
-            "fieldPath": "id",
+            "fieldPath": "task_id",
             "columnName": "task_id",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "proj_id",
+            "columnName": "proj_id",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "title",
@@ -46,7 +52,7 @@
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "task_id"
+              "proj_id"
             ],
             "referencedColumns": [
               "project_id"
@@ -59,7 +65,7 @@
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`project_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `colorCode` INTEGER NOT NULL)",
         "fields": [
           {
-            "fieldPath": "id",
+            "fieldPath": "project_id",
             "columnName": "project_id",
             "affinity": "INTEGER",
             "notNull": true
@@ -90,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eef83ab7da8a2d1ab6b80f1cbf675b0d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '19aa36475d789fe8acae80d3dad44ce2')"
     ]
   }
 }

@@ -49,7 +49,7 @@ class AddTaskFragment : Fragment() {
         binding.apply {
             taskAddDate.text = "Not set"
 
-            taskAddButton.setOnClickListener {
+            /*taskAddButton.setOnClickListener {
                 val title = this.taskAddTitle.text.toString()
                 val newTask = Task(
                     0,
@@ -58,7 +58,7 @@ class AddTaskFragment : Fragment() {
                     date)
                 taskListViewModel.addTask(newTask)
                 findNavController().popBackStack()
-            }
+            }*/
 
             /*taskAddDate.setOnClickListener {
                 findNavController().navigate(AddTaskFragmentDirections.selectDate())
