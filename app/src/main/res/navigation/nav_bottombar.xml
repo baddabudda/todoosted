@@ -7,7 +7,7 @@
 
     <action
         android:id="@+id/open_task"
-        app:destination="@id/taskDetailFragment" />
+        app:destination="@id/taskDetailDialog" />
 
     <action
         android:id="@+id/add_task"
@@ -17,21 +17,6 @@
     <include app:graph="@navigation/nav_today"/>
     <include app:graph="@navigation/nav_track"/>
     <include app:graph="@navigation/nav_browse"/>
-
-    <fragment
-        android:id="@+id/taskDetailFragment"
-        android:name="com.forgblord.todo_prototype.fragments.task_detail.TaskDetailFragment"
-        android:label="Task" >
-        <argument
-            android:name="taskId"
-            app:argType="integer" />
-        <action
-            android:id="@+id/select_date"
-            app:destination="@id/datePickerFragment" />
-        <action
-            android:id="@+id/action_taskDetail_to_projectPicker"
-            app:destination="@id/projectPickerDialog" />
-    </fragment>
 
     <dialog
         android:id="@+id/datePickerFragment"
@@ -56,5 +41,19 @@
         android:id="@+id/projectPickerDialog"
         android:name="com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog"
         android:label="ProjectPickerDialog" />
+    <dialog
+        android:id="@+id/taskDetailDialog"
+        android:name="com.forgblord.todo_prototype.fragments.task_detail.TaskDetailDialog"
+        android:label="TaskDetailDialog">
+        <argument
+            android:name="taskId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/select_date"
+            app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/action_taskDetail_to_projectPicker"
+            app:destination="@id/projectPickerDialog" />
+    </dialog>
 
 </navigation>

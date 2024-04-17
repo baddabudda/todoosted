@@ -73,10 +73,12 @@ class TodoRepository private constructor(
         projectDao.addProject(project)
     }
 
-    fun getAllTasksByProjectId(id: Int): Flow<ProjectAndTasks> = taskDao.getAllTasksByProjectId(id)
+    fun getAllTasksByProjectId(id: Int): Flow<List<Task>> = taskDao.getAllTasksByProjectId(id)
 
     suspend fun deleteProject(project: Project) {
         projectDao.deleteProject(project)
     }
+
+    fun getInbox(): Flow<List<Task>> = taskDao.getInbox()
 
 }

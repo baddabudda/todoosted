@@ -54,8 +54,8 @@ class TaskViewModel: ViewModel() {
     fun getAllByProjectId(id: Int) {
         viewModelScope.launch {
             todoRepository.getAllTasksByProjectId(id).collect {
-                Log.d("VIEWMODEL", "${it.tasks}")
-                _taskList.value = it.tasks
+                Log.d("VIEWMODEL", "$it")
+                _taskList.value = it
             }
         }
     }
@@ -70,6 +70,7 @@ class TaskViewModel: ViewModel() {
 
     fun addTask(task: Task) {
         viewModelScope.launch {
+            Log.d("TASK", "$task")
             todoRepository.addTask(task)
         }
     }
@@ -77,6 +78,15 @@ class TaskViewModel: ViewModel() {
     fun updateTask(task: Task) {
         viewModelScope.launch {
             todoRepository.updateTask(task)
+        }
+    }
+
+    fun getInbox() {
+        viewModelScope.launch {
+            todoRepository.getInbox().collect {
+                Log.d("VIEWMODEL", "$it")
+                _taskList.value = it
+            }
         }
     }
 }

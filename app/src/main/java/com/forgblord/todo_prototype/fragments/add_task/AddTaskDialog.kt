@@ -82,7 +82,6 @@ class AddTaskDialog: BottomSheetDialogFragment() {
         setFragmentResultListener(ProjectPickerDialog.REQUEST_KEY_PROJECT) { _, bundle ->
             val projId = bundle.getInt(ProjectPickerDialog.BUNDLE_KEY_ID)
             val projectTitle = bundle.getString(ProjectPickerDialog.BUNDLE_KEY_TITLE)
-            Log.d("DIALOG", projectTitle.toString())
 
             projectId = projId
             binding.chipProject.text = projectTitle.toString()

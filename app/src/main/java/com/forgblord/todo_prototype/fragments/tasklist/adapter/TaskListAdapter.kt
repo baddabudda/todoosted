@@ -13,20 +13,7 @@ class TaskListViewHolder (
     private val binding: ItemTaskBinding,
     private val onCheckListener: (task: Task) -> Unit,
 ): RecyclerView.ViewHolder(binding.root) {
-/*    fun bind(task: Task) {
-        binding.apply {
-            checkBox.isChecked = task.completed
-            taskTitle.text = task.title
-            taskDate.visibility = View.GONE
-
-            if (task.date != null) {
-                taskDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(task.date)
-                taskDate.visibility = View.VISIBLE
-            }
-        }
-    }*/
-
-    fun bind(task: Task, onTaskClicked: (id: Int) -> Unit) {
+    fun bind(task: Task, onTaskClicked: (id: Int) -> Unit, updateList: (position: Int) -> Unit) {
         binding.apply {
             taskTitle.text = task.title
             taskDate.visibility = View.GONE
@@ -51,15 +38,10 @@ class TaskListViewHolder (
             }
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    this.taskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                    task.completed = true
-                    onCheckListener(task)
-                } else {
-                    this.taskTitle.paintFlags = 0
-                    task.completed = false
-                    onCheckListener(task)
-                }
+                this.taskTitle.paintFlags = if (isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
+                task.completed = isChecked
+                updateList(absoluteAdapterPosition)
+                onCheckListener(task)
             }
         }
     }
@@ -86,17 +68,12 @@ class TaskListAdapter (
     override fun onBindViewHolder(holder: TaskListViewHolder, position: Int) {
         val task = tasks[position]
         onBind = true
-        holder.bind(task, onItemClickListener)
+        holder.bind(task, onItemClickListener, { position -> removeOnceCompleted(position) })
 //        holder.bind(task, onItemClickListener)
         onBind = false
     }
 
-/*    private fun removeOnceCompleted(position: Int, id: UUID) {
-        if (!onBind) {
-            tasks.removeAt(tasks.indexOf(tasks.find{it.id == id}))
-            onCheckListener.removeById(id)
-            notifyItemRemoved(position)
-        }
-    }*/
-
+    private fun removeOnceCompleted(position: Int) {
+        if (!onBind) notifyItemRemoved(position)
+    }
 }

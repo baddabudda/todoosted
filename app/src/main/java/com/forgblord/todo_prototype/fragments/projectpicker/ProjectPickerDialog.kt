@@ -1,6 +1,7 @@
 package com.forgblord.todo_prototype.fragments.projectpicker
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
 import com.forgblord.todo_prototype.databinding.FragmentProjectPickBinding
@@ -32,11 +34,14 @@ class ProjectPickerDialog: DialogFragment() {
     override fun onStart() {
         super.onStart()
 
-        val dialogWidth = 1000 // specify a value here
-        val dialogHeight = 500 // specify a value here
+        val density = requireContext().resources.displayMetrics.density
+
+        val dialogWidth = 300 // specify a value here
+        val dialogHeight = 300 // specify a value here
 
         dialog?.window?.apply {
-            setLayout(dialogWidth, dialogHeight)
+            setLayout((dialogWidth * density).toInt(), (dialogHeight * density).toInt())
+            setGravity(Gravity.CENTER)
         }
     }
 

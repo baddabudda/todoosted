@@ -24,6 +24,7 @@ import com.forgblord.todo_prototype.utils.popOnBackPress
 import kotlinx.coroutines.launch
 import java.util.Date
 
+/*
 class TaskDetailFragment: Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()
 
@@ -57,7 +58,8 @@ class TaskDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.apply {
+        */
+/*binding.apply {
             taskDetailProject.text = "Default Project"
             taskDetailTitle.text = task
             taskDetailDate.text = if (task.date == null) "Not set"
@@ -69,9 +71,11 @@ class TaskDetailFragment: Fragment() {
                     onChecked(task.id)
                 }
             }
-        }*/
+        }*//*
 
-        binding.apply {
+
+        */
+/*binding.apply {
             taskDetailTitle.doOnTextChanged { text, _, _, _ ->
                 taskDetailViewModel.updateTask { oldTask ->
                     oldTask.copy(title=text.toString())
@@ -108,7 +112,8 @@ class TaskDetailFragment: Fragment() {
                     _task = flowTask
                 }
             }
-        }
+        }*//*
+
     }
 
     override fun onDestroyView() {
@@ -116,7 +121,8 @@ class TaskDetailFragment: Fragment() {
         _binding = null
     }
 
-    private fun updateUI(task: Task) {
+    */
+/*private fun updateUI(task: Task) {
         binding.apply {
             taskDetailProject.text = "Default Project"
 
@@ -130,9 +136,11 @@ class TaskDetailFragment: Fragment() {
 
             taskDetailCheckbox.isChecked = task.completed
         }
-    }
+    }*//*
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    */
+/*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val task: Task = taskListViewModel.getTaskById(args.taskId)
         binding.apply {
@@ -148,9 +156,12 @@ class TaskDetailFragment: Fragment() {
                 }
             }
         }
-    }*/
+    }*//*
 
-    /*private fun onChecked(id: UUID) {
+
+    */
+/*private fun onChecked(id: UUID) {
         taskListViewModel.removeTaskById(id)
-    }*/
-}
+    }*//*
+
+}*/

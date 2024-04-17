@@ -3,16 +3,19 @@ package com.forgblord.todo_prototype.data
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.MapColumn
+import androidx.room.MapInfo
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.ProjectAndTasks
 import com.forgblord.todo_prototype.data.models.Task
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task WHERE completed=0")
     fun getAllTasks(): Flow<List<Task>>
 
     @Query("SELECT * FROM task WHERE task_id=(:id)")
@@ -27,13 +30,22 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(task: Task)
 
-    @Query("SELECT task_id, title, completed, date FROM task where date(date, 'unixepoch', 'localtime') = date('now', 'localtime')")
+    @Query(
+        "SELECT task_id, title, completed, date FROM task " +
+        "WHERE date(date, 'unixepoch', 'localtime') = date('now', 'localtime') AND completed=0"
+    )
     fun getAllDueToday(): Flow<List<Task>>
 
     @Query("SELECT * FROM task WHERE completed=1")
     fun getCompleted(): Flow<List<Task>>
 
-    @Transaction
-    @Query("SELECT * FROM project WHERE project_id=:id")
-    fun getAllTasksByProjectId(id: Int): Flow<ProjectAndTasks>
+    @Query(
+        "SELECT task.* FROM task JOIN project " +
+        "ON project.project_id = task.proj_id " +
+        "WHERE project.project_id=:id AND task.completed=0"
+    )
+    fun getAllTasksByProjectId(id: Int): Flow<List<Task>>
+
+    @Query("SELECT * FROM task WHERE proj_id IS NULL AND completed=0")
+    fun getInbox(): Flow<List<Task>>
 }

@@ -25,7 +25,7 @@ class InboxFragment: TaskListFragment() {
     }
 
     override fun initializeList() {
-        taskListViewModel.getAllTasks()
+        taskListViewModel.getInbox()
     }
 
 }
