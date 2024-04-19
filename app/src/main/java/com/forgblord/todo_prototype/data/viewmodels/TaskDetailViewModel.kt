@@ -1,9 +1,11 @@
 package com.forgblord.todo_prototype.data.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.data.repository.TodoRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,33 +15,28 @@ import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
     taskId: Int,
-): ViewModel() {
+): TaskVM() {
     private val todoRepository: TodoRepository = TodoRepository.getInstance()
 
-    private val _task: MutableStateFlow<Task?> = MutableStateFlow(null)
-    val task: StateFlow<Task?> = _task.asStateFlow()
+    private val _task: MutableStateFlow<TaskProject?> = MutableStateFlow(null)
+    val task: StateFlow<TaskProject?> = _task.asStateFlow()
 
     init {
         viewModelScope.launch {
             _task.value = todoRepository.getTaskById(taskId)
+            Log.d("TASK", "${_task.value}")
         }
     }
 
     override fun onCleared() {
         super.onCleared()
 
-        task.value?.let { todoRepository.updateTask(it) }
+        task.value?.let { todoRepository.updateTask(it.task) }
     }
 
-    fun updateTask(onUpdate: (Task) -> Task) {
+    fun updateTask(onUpdate: (TaskProject) -> TaskProject) {
         _task.update { oldTask ->
             oldTask?.let { onUpdate(it) }
-        }
-    }
-
-    fun deleteTask(task: Task) {
-        viewModelScope.launch{
-            todoRepository.deleteTask(task)
         }
     }
 }

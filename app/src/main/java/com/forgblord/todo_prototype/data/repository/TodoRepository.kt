@@ -4,8 +4,8 @@ import com.forgblord.todo_prototype.data.ProjectDao
 import com.forgblord.todo_prototype.data.TaskDao
 import com.forgblord.todo_prototype.data.TodoDatabase
 import com.forgblord.todo_prototype.data.models.Project
-import com.forgblord.todo_prototype.data.models.ProjectAndTasks
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.models.TaskProject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -31,41 +31,27 @@ class TodoRepository private constructor(
         }
     }
 
-//    fun getAllTasks(): Flow<List<Task>> = database.taskDao().getAllTasks()
     fun getAllTasks(): Flow<List<Task>> = taskDao.getAllTasks()
 
-//    suspend fun getTaskById(id: Int): Task = database.taskDao().getTaskById(id)
-    suspend fun getTaskById(id: Int): Task = taskDao.getTaskById(id)
+    suspend fun getTaskById(id: Int): TaskProject = taskDao.getTaskById(id)
 
-    /*fun updateTask(task: Task) {
-        coroutineScope.launch {
-            database.taskDao().updateTask(task)
-        }
-    }*/
     fun updateTask(task: Task) {
         coroutineScope.launch {
             taskDao.updateTask(task)
         }
     }
 
-//    fun getAllDueToday(): Flow<List<Task>> = database.taskDao().getAllDueToday()
-    fun getAllDueToday(): Flow<List<Task>> = taskDao.getAllDueToday()
+    fun getAllDueToday(): Flow<List<TaskProject>> = taskDao.getAllDueToday()
 
-    /*suspend fun addTask(task: Task) {
-        database.taskDao().addTask(task)
-    }*/
     suspend fun addTask(task: Task) {
         taskDao.addTask(task)
     }
 
-    /*suspend fun deleteTask(task: Task) {
-        database.taskDao().deleteTask(task)
-    }*/
     suspend fun deleteTask(task: Task) {
         taskDao.deleteTask(task)
     }
 
-    fun getCompleted(): Flow<List<Task>> = taskDao.getCompleted()
+    fun getCompleted(): Flow<List<TaskProject>> = taskDao.getCompleted()
 
     fun getAllProjects(): Flow<List<Project>> = projectDao.getAllProjects()
 
@@ -73,12 +59,12 @@ class TodoRepository private constructor(
         projectDao.addProject(project)
     }
 
-    fun getAllTasksByProjectId(id: Int): Flow<List<Task>> = taskDao.getAllTasksByProjectId(id)
+    fun getAllTasksByProjectId(id: Int): Flow<List<TaskProject>> = taskDao.getAllTasksByProjectId(id)
 
     suspend fun deleteProject(project: Project) {
         projectDao.deleteProject(project)
     }
 
-    fun getInbox(): Flow<List<Task>> = taskDao.getInbox()
+    fun getInbox(): Flow<List<TaskProject>> = taskDao.getInbox()
 
 }

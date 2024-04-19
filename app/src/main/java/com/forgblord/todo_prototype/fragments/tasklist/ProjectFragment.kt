@@ -6,18 +6,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.NavBottombarDirections
 import com.forgblord.todo_prototype.utils.popOnBackPress
-import com.forgblord.todo_prototype.utils.setActivityTitle
 
 class ProjectFragment: TaskListFragment() {
     private val args: ProjectFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setActivityTitle(args.projectTitle)
         popOnBackPress(true)
     }
+
     override fun openTask(taskId: Int) {
         findNavController().navigate(NavBottombarDirections.openTask(taskId))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("LIST", "VIEW HAS BEEN PAUSED")
     }
 
     override fun initializeList() {

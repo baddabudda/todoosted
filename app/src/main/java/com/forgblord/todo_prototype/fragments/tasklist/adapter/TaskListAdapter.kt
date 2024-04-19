@@ -7,48 +7,45 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
 
 class TaskListViewHolder (
     private val binding: ItemTaskBinding,
     private val onCheckListener: (task: Task) -> Unit,
 ): RecyclerView.ViewHolder(binding.root) {
-    fun bind(task: Task, onTaskClicked: (id: Int) -> Unit, updateList: (position: Int) -> Unit) {
+    fun bind(taskProject: TaskProject, onTaskClicked: (id: Int) -> Unit, updateList: (position: Int) -> Unit) {
         binding.apply {
-            taskTitle.text = task.title
+            taskTitle.text = taskProject.task.title
             taskDate.visibility = View.GONE
-            taskProject.text = "Inbox"
+            projectTitle.text = taskProject.projectName ?: "Inbox"
 
-            if (task.proj_id != null) {
-                taskProject.text = task.proj_id.toString()
-            }
-
-            if (task.date != null) {
-                taskDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(task.date)
+            if (taskProject.task.date != null) {
+                taskDate.text = DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(taskProject.task.date)
                 taskDate.visibility = View.VISIBLE
             }
 
-            if (task.completed) {
-                checkBox.isChecked = task.completed
+            if (taskProject.task.completed) {
+                checkBox.isChecked = taskProject.task.completed
                 this.taskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             }
 
             taskItemViewgroup.setOnClickListener {
-                onTaskClicked(task.task_id)
+                onTaskClicked(taskProject.task.task_id)
             }
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 this.taskTitle.paintFlags = if (isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
-                task.completed = isChecked
+                taskProject.task.completed = isChecked
                 updateList(absoluteAdapterPosition)
-                onCheckListener(task)
+                onCheckListener(taskProject.task)
             }
         }
     }
 }
 
 class TaskListAdapter (
-    private val tasks: List<Task>,
+    private val tasks: List<TaskProject>,
     private val onCheckListener: (task: Task) -> Unit,
     private val onItemClickListener: (id: Int) -> Unit,
 ): RecyclerView.Adapter<TaskListViewHolder>() {
@@ -58,7 +55,6 @@ class TaskListAdapter (
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemTaskBinding.inflate(inflater, parent, false)
         return TaskListViewHolder(binding, onCheckListener)
-//        return TaskListViewHolder(binding) { position: Int, id: UUID -> removeOnceCompleted(position, id) }
     }
 
     override fun getItemCount(): Int {
@@ -69,7 +65,6 @@ class TaskListAdapter (
         val task = tasks[position]
         onBind = true
         holder.bind(task, onItemClickListener, { position -> removeOnceCompleted(position) })
-//        holder.bind(task, onItemClickListener)
         onBind = false
     }
 

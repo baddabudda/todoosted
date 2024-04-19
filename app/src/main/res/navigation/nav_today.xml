@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/todayFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.TodayFragment"
-        android:label="TodayFragment" />
+        android:label="Today" />
 </navigation>

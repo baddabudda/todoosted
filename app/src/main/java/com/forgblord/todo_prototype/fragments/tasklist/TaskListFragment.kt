@@ -10,20 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.viewmodels.TaskVM
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
-import com.forgblord.todo_prototype.databinding.FragmentInboxBinding
-import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
 import com.forgblord.todo_prototype.databinding.FragmentTasklistBinding
 import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import kotlinx.coroutines.launch
-import java.util.UUID
 
-abstract class TaskListFragment: Fragment() {
+abstract class TaskListFragment(): Fragment() {
     private var _binding: FragmentTasklistBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -31,6 +26,8 @@ abstract class TaskListFragment: Fragment() {
         }
 
     protected val taskListViewModel: TaskViewModel by viewModels()
+    private val taskModel: TaskVM by viewModels()
+
     abstract fun openTask(taskId: Int)
     abstract fun initializeList()
 
@@ -63,7 +60,7 @@ abstract class TaskListFragment: Fragment() {
     }
 
     private fun updateOnCheck(task: Task) {
-        taskListViewModel.updateTask(task)
+        taskModel.updateTask(task)
     }
 
     override fun onDestroyView() {

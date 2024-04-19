@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/inboxFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.InboxFragment"
-        android:label="InboxFragment" />
+        android:label="Inbox" />
 </navigation>

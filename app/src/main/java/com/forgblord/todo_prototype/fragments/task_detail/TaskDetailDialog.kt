@@ -1,5 +1,6 @@
 package com.forgblord.todo_prototype.fragments.task_detail
 
+import android.content.DialogInterface
 import android.icu.text.DateFormat
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -16,11 +19,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
+import com.forgblord.todo_prototype.fragments.dialogs.ConfirmDiscardDialog
 import com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -40,7 +46,7 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
         TaskDetailViewModelFactory(args.taskId)
     }
 
-    private var _task: Task? = null
+    private var _task: TaskProject? = null
 
     override fun onStart() {
         super.onStart()
@@ -86,22 +92,40 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*val popupMenu = PopupMenu(requireContext(), binding.btnSettingsTask)
+        popupMenu.inflate(R.menu.menu_task)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_edit_task -> {
+                    binding.etTask.boxStrokeWidth = 1
+                    true
+                }
+                R.id.menu_delete_task -> {
+                    Toast
+                        .makeText(context, "DELETE", Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }*/
+
         binding.apply {
             taskName.doOnTextChanged { text, _, _, _ ->
                 taskDetailViewModel.updateTask { oldTask ->
-                    oldTask.copy(title=text.toString())
+//                    oldTask.copy(title=text.toString())
+                    oldTask.copy(
+                        task=oldTask.task.copy(title=text.toString())
+                    )
                 }
             }
 
-            /*cbCompleted.setOnCheckedChangeListener { _, isChecked ->
-                taskDetailViewModel.updateTask { oldTask ->
-                    oldTask.copy(completed=isChecked)
-                }
-            }*/
-
             cbCompleted.setOnClickListener {
                 taskDetailViewModel.updateTask { oldTask ->
-                    oldTask.copy(completed=!oldTask.completed)
+//                    oldTask.copy(completed=!oldTask.completed)
+                    oldTask.copy(
+                        task=oldTask.task.copy(completed=!oldTask.task.completed)
+                    )
                 }
 
                 dismiss()
@@ -112,9 +136,13 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
             }
 
             btnDeleteTask.setOnClickListener {
-                _task?.let { it1 -> taskDetailViewModel.deleteTask(it1) }
+                _task?.let { it1 -> taskDetailViewModel.deleteTask(it1.task) }
                 findNavController().popBackStack()
             }
+
+            /*btnSettingsTask.setOnClickListener {
+                popupMenu.show()
+            }*/
 
             projectName.setOnClickListener {
                 findNavController().navigate(TaskDetailDialogDirections.actionTaskDetailToProjectPicker())
@@ -122,8 +150,11 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
 
             setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { _, bundle ->
                 val date = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
-                taskDetailViewModel.updateTask { task: Task ->
-                    task.copy(date=date)
+                taskDetailViewModel.updateTask { oldTask ->
+//                    task.copy(date=date)
+                    oldTask.copy(
+                        task=oldTask.task.copy(date=date)
+                    )
                 }
             }
 
@@ -133,8 +164,12 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
                 Log.d("DIALOG", projectTitle.toString())
 
                 projectName.text = projectTitle.toString()
-                taskDetailViewModel.updateTask { task: Task ->
-                    task.copy(proj_id=projId)
+                taskDetailViewModel.updateTask { oldTask ->
+//                    task.copy(proj_id=projId)
+                    oldTask.copy(
+                        task=oldTask.task.copy(proj_id=projId),
+                        projectName=projectTitle
+                    )
                 }
             }
         }
@@ -149,19 +184,24 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
         }
     }
 
-    private fun updateUI(task: Task) {
+    private fun updateUI(taskProject: TaskProject) {
         binding.apply {
-            projectName.text = task.proj_id.toString()
+            projectName.text = taskProject.projectName ?: "Inbox"
 
-            if (taskName.text.toString() != task.title) {
-                taskName.setText(task.title)
+            if (taskName.text.toString() != taskProject.task.title) {
+                taskName.setText(taskProject.task.title)
             }
 
-            chipDate.text = if (task.date == null) "Not set"
+            chipDate.text = if (taskProject.task.date == null) "Not set"
             else DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
-                .format(task.date)
+                .format(taskProject.task.date)
 
-            cbCompleted.isChecked = task.completed
+            cbCompleted.isChecked = taskProject.task.completed
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
     }
 }

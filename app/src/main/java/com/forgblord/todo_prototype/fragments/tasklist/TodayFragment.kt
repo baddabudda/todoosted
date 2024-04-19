@@ -20,6 +20,7 @@ import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
 import kotlinx.coroutines.launch
 
 class TodayFragment: TaskListFragment() {
+
     override fun openTask(taskId: Int) {
         findNavController().navigate(NavBottombarDirections.openTask(taskId))
     }

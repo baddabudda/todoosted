@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.forgblord.todo_prototype.data.models.Project
-import com.forgblord.todo_prototype.data.models.ProjectAndTasks
 import com.forgblord.todo_prototype.data.models.Task
 import java.lang.IllegalStateException
 
@@ -17,7 +16,7 @@ abstract class TodoDatabase: RoomDatabase() {
     abstract fun projectDao(): ProjectDao
 
     companion object {
-        private var INSTANCE: TodoDatabase? = null
+        @Volatile var INSTANCE: TodoDatabase? = null
 
         fun initialize(context: Context) {
             if (INSTANCE == null) {

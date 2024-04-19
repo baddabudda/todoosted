@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.Task
+import com.forgblord.todo_prototype.data.viewmodels.TaskVM
 import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentAddTaskSheetBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
@@ -26,7 +27,7 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val taskListViewModel: TaskViewModel by viewModels()
+    private val taskViewModel: TaskVM by viewModels()
 
     var date: Date? = null
     var projectId: Int? = null
@@ -53,8 +54,8 @@ class AddTaskDialog: BottomSheetDialogFragment() {
                     proj_id = projectId,
                     title=title,
                     date=date)
-                taskListViewModel.addTask(newTask)
-                dismiss()
+                taskViewModel.addTask(newTask)
+                findNavController().navigateUp()
             }
 
             chipDate.setOnClickListener {
@@ -64,10 +65,6 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             chipProject.setOnClickListener {
                 findNavController().navigate(AddTaskDialogDirections.actionAddTaskToProjectPicker())
             }
-
-            /*btnCancel.setOnClickListener {
-                dismiss()
-            }*/
 
         }
 

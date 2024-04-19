@@ -50,6 +50,16 @@
             app:layout_constraintStart_toEndOf="@+id/project_color"
             app:layout_constraintTop_toTopOf="parent" />
 
+<!--        <ImageButton
+            android:id="@+id/btn_settings_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:src="@drawable/ic_settings"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
+
         <ImageButton
             android:id="@+id/btn_delete_task"
             android:layout_width="wrap_content"
@@ -59,6 +69,16 @@
             android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!--<ImageButton
+            android:id="@+id/btn_edit_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="5dp"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete_task"
+            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

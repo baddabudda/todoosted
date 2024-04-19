@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/trackFragment"
         android:name="com.forgblord.todo_prototype.fragments.track.TrackFragment"
-        android:label="TrackFragment" />
+        android:label="Track" />
 </navigation>

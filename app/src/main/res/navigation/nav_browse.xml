@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/browseFragment"
         android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
-        android:label="BrowseFragment" >
+        android:label="Browse" >
         <action
             android:id="@+id/action_browse_to_project"
             app:destination="@id/projectFragment"
@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/projectFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
-        android:label="ProjectFragment" >
+        android:label="Project" >
         <argument
             android:name="projectId"
             app:argType="integer" />
@@ -36,11 +36,19 @@
     <fragment
         android:id="@+id/completedFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.CompletedFragment"
-        android:label="CompletedFragment" />
+        android:label="Completed Tasks" />
 
     <dialog
         android:id="@+id/addProjectFragment"
         android:name="com.forgblord.todo_prototype.fragments.browse.AddProjectFragment"
-        android:label="Add Project" />
+        android:label="Add Project" >
+        <action
+            android:id="@+id/action_addProject_to_colorPicker"
+            app:destination="@id/colorPickerDialog" />
+    </dialog>
+    <dialog
+        android:id="@+id/colorPickerDialog"
+        android:name="com.forgblord.todo_prototype.fragments.dialogs.ColorPickerDialog"
+        android:label="ColorPickerDialog" />
 
 </navigation>
