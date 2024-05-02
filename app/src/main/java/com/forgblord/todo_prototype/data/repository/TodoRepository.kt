@@ -65,6 +65,12 @@ class TodoRepository private constructor(
         projectDao.deleteProject(project)
     }
 
+    fun updateProject(project: Project) {
+        coroutineScope.launch {
+            projectDao.updateProject(project)
+        }
+    }
+
     fun getInbox(): Flow<List<TaskProject>> = taskDao.getInbox()
 
 }

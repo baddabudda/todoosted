@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.forgblord.todo_prototype.data.models.Project
+import com.forgblord.todo_prototype.data.models.Task
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,4 +19,7 @@ interface ProjectDao {
 
     @Delete
     suspend fun deleteProject(project: Project)
+
+    @Update
+    suspend fun updateProject(project: Project)
 }

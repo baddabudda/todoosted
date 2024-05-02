@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_project"
+    app:startDestination="@id/addProjectFragment">
+
+    <dialog
+        android:id="@+id/addProjectFragment"
+        android:name="com.forgblord.todo_prototype.fragments.browse.AddProjectFragment"
+        android:label="fragment_add_project_sheet"
+        tools:layout="@layout/fragment_add_project_sheet" >
+        <action
+            android:id="@+id/action_addProject_to_colorPicker"
+            app:destination="@id/colorPickerDialog" />
+        <argument
+            android:name="project"
+            app:argType="com.forgblord.todo_prototype.data.models.Project"
+            app:nullable="true" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/colorPickerDialog"
+        android:name="com.forgblord.todo_prototype.fragments.dialogs.ColorPickerDialog"
+        android:label="ColorPickerDialog" />
+</navigation>

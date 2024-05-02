@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/browse"
     app:startDestination="@+id/browseFragment">
 
     <fragment
         android:id="@+id/browseFragment"
         android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
-        android:label="Browse" >
+        android:label="Browse"
+        tools:layout="@layout/fragment_browse">
         <action
             android:id="@+id/action_browse_to_project"
             app:destination="@id/projectFragment"
@@ -18,37 +20,38 @@
             app:popUpTo="@id/browseFragment" />
         <action
             android:id="@+id/action_browse_to_addProject"
-            app:destination="@id/addProjectFragment" />
+            app:destination="@id/nav_project">
+            <argument
+                android:name="project"
+                app:argType="com.forgblord.todo_prototype.data.models.Project"
+                app:nullable="true" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/projectFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
-        android:label="Project" >
+        android:label="Project"
+        tools:layout="@layout/fragment_tasklist">
         <argument
-            android:name="projectId"
-            app:argType="integer" />
-        <argument
-            android:name="projectTitle"
-            app:argType="string" />
+            android:name="project"
+            app:argType="com.forgblord.todo_prototype.data.models.Project" />
+        <action
+            android:id="@+id/action_project_to_editflow"
+            app:destination="@+id/nav_project">
+            <argument
+                android:name="project"
+                app:argType="com.forgblord.todo_prototype.data.models.Project"
+                app:nullable="true" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/completedFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.CompletedFragment"
-        android:label="Completed Tasks" />
+        android:label="Completed Tasks"
+        tools:layout="@layout/fragment_tasklist"/>
 
-    <dialog
-        android:id="@+id/addProjectFragment"
-        android:name="com.forgblord.todo_prototype.fragments.browse.AddProjectFragment"
-        android:label="Add Project" >
-        <action
-            android:id="@+id/action_addProject_to_colorPicker"
-            app:destination="@id/colorPickerDialog" />
-    </dialog>
-    <dialog
-        android:id="@+id/colorPickerDialog"
-        android:name="com.forgblord.todo_prototype.fragments.dialogs.ColorPickerDialog"
-        android:label="ColorPickerDialog" />
+    <include app:graph="@navigation/nav_project"/>
 
 </navigation>

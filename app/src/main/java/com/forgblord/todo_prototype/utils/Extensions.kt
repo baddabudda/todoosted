@@ -14,3 +14,6 @@ fun Fragment.popOnBackPress(flag: Boolean) {
     callback?.isEnabled = true
 }
 
+fun Activity.getSupportActionBar() {
+
+}

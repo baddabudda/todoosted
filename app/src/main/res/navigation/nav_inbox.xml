@@ -2,6 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/inbox"
+    android:label="browse"
     app:startDestination="@+id/inboxFragment">
 
     <fragment

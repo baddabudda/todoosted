@@ -35,8 +35,14 @@ class ProjectViewModel: ViewModel() {
     }
 
     fun deleteProject(project: Project) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             todoRepository.deleteProject(project)
+        }
+    }
+
+    fun updateProject(project: Project) {
+        viewModelScope.launch {
+            todoRepository.updateProject(project)
         }
     }
 }

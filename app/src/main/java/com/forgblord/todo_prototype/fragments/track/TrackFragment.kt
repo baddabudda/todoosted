@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.databinding.FragmentTodayBinding
 import com.forgblord.todo_prototype.databinding.FragmentTrackBinding
 import com.forgblord.todo_prototype.services.TimerBroadcast
@@ -55,7 +56,7 @@ class TrackFragment: Fragment() {
     override fun onResume() {
         super.onResume()
 
-        getTimerStatus() // starting foreground service
+//        getTimerStatus() // starting foreground service
 
         val statusFilter = IntentFilter() // setting up intent filter (send status)
         statusFilter.addAction(TimerBroadcast.TIMER_STATUS)
@@ -87,7 +88,7 @@ class TrackFragment: Fragment() {
         requireActivity().unregisterReceiver(statusReceiver)
         requireActivity().unregisterReceiver(timeReceiver)
 
-        moveForeground()
+//        moveForeground()
     }
 
     private fun moveForeground() {

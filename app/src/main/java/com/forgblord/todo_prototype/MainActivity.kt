@@ -1,7 +1,6 @@
 package com.forgblord.todo_prototype
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,7 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.forgblord.todo_prototype.databinding.ActivityMainBinding
-import com.forgblord.todo_prototype.fragments.add_task.AddTaskDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -34,8 +32,16 @@ class MainActivity : AppCompatActivity() {
         val bottomNavBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavBar.setupWithNavController(navController)
 
-        bottomNavBar.setOnItemReselectedListener { item ->
-            navController.popBackStack()
+        bottomNavBar.setOnItemReselectedListener { menuItem ->
+            val destination = when (menuItem.title) {
+                "Inbox" -> R.id.inboxFragment
+                "Today" -> R.id.todayFragment
+                "Track" -> R.id.trackFragment
+                "Browse" -> R.id.browseFragment
+                else -> R.id.browseFragment
+            }
+
+            navController.popBackStack(destination, false)
         }
 
         binding.fabAddTask.setOnClickListener {
@@ -44,19 +50,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.top_app_bar, menu)
-        return true
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-    /*private val onBackPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            navController.popBackStack()
-        }
-    }*/
 
     fun getAddButton(): FloatingActionButton {
         return binding.fabAddTask

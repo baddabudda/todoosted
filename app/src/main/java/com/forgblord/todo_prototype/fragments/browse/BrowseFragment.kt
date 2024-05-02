@@ -14,10 +14,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
 import com.forgblord.todo_prototype.databinding.FragmentBrowseBinding
+import com.forgblord.todo_prototype.fragments.browse.BrowseFragmentDirections
+import com.forgblord.todo_prototype.fragments.browse.adapter.ProjectListAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -30,8 +33,9 @@ class BrowseFragment: Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-//    private val projectListViewModel: ProjectListViewModel by activityViewModels()
     private val projectViewModel: ProjectViewModel by viewModels()
+
+    private var prevSize: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +43,7 @@ class BrowseFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBrowseBinding.inflate(inflater, container, false)
-        Log.d("BROWSE", "VIEW HAS BEEN CREATED")
+        binding.projectList.layoutManager = LinearLayoutManager(context)
 
         setupDefaultTabNavigation()
 
@@ -48,37 +52,38 @@ class BrowseFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("BROWSE", "onViewCreated")
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 projectViewModel.projectList.collectLatest { list ->
-                    val curSize = binding.tabContainer.childCount - PREDEFINED_CHILDREN_COUNT
-                    Log.d("BROWSE", curSize.toString())
-                    Log.d("BROWSE", list.size.toString())
-//                    Log.d("BROWSE", "CHANGE ENCOUNTERED!")
+                    binding.projectList.adapter = ProjectListAdapter(list) { project ->
+                        findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project))
+                    }
 
-                    for (project in list.slice(curSize until list.size)) {
+//                    val curSize = binding.tabContainer.childCount - PREDEFINED_CHILDREN_COUNT
+
+                    /*for (project in list.slice(curSize until list.size)) {
                         val projectView = inflateProject(project, binding.tabContainer)
                         binding.tabContainer.addView(projectView)
-                    }
+                    }*/
                 }
             }
         }
 
         binding.apply {
             addProject.setOnClickListener {
-                findNavController().navigate(R.id.action_browse_to_addProject)
+                findNavController().navigate(BrowseFragmentDirections.actionBrowseToAddProject(null))
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("BROWSE FRAGMENT", "DESTROYED")
         _binding = null
     }
 
-    private fun inflateProject(project: Project, parent: ViewGroup?): View {
+    /*private fun inflateProject(project: Project, parent: ViewGroup?): View {
         val inflater = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
 
         val projectTitle: TextView = inflater.findViewById(R.id.project_title)
@@ -94,11 +99,11 @@ class BrowseFragment: Fragment() {
         }
 
         inflater.rootView.setOnClickListener {
-            findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project.project_id, project.title))
+            findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project))
         }
 
         return inflater
-    }
+    }*/
 
     private fun setupDefaultTabNavigation() {
         binding.completed.setOnClickListener {
