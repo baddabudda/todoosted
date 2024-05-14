@@ -22,6 +22,7 @@ import com.forgblord.todo_prototype.databinding.FragmentAddTaskSheetBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import com.forgblord.todo_prototype.fragments.dialogs.PriorityDialog
 import com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog
+import com.forgblord.todo_prototype.utils.menuToPriority
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Date
 
@@ -102,13 +103,6 @@ class AddTaskDialog: BottomSheetDialogFragment() {
         }*/
     }
 
-    private fun updatePriority(priorityString: String): Int = when (priorityString) {
-        getString(R.string.priority_1) -> 1
-        getString(R.string.priority_2) -> 2
-        getString(R.string.priority_3) -> 3
-        else -> 4
-    }
-
     private fun showMenu(view: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(requireContext(), view)
         popup.menuInflater.inflate(menuRes, popup.menu)
@@ -118,7 +112,7 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             binding.chipPriority.text = it.title.toString().substringBefore(" ")
             binding.chipPriority.chipIcon = it.icon
             binding.chipPriority.chipIconTint = it.iconTintList
-            priorityId = updatePriority(it.title.toString())
+            priorityId = menuToPriority(binding.root.context, it.title.toString())
             popup.dismiss()
             true
         }

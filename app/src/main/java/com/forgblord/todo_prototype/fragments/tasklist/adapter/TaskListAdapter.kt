@@ -6,12 +6,11 @@ import android.icu.text.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
+import com.forgblord.todo_prototype.utils.priorityToColor
 
 class TaskListViewHolder (
     private val binding: ItemTaskBinding,
@@ -37,12 +36,8 @@ class TaskListViewHolder (
                 onTaskClicked(taskProject.task.task_id)
             }
 
-            checkBox.buttonTintList = when (taskProject.task.priority) {
-                1 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.red_500))
-                2 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.yellow_500))
-                3 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.blue_500))
-                else -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.gray))
-            }
+            checkBox.buttonTintList = ColorStateList.valueOf(priorityToColor(root.context,
+                                                                            taskProject.task.priority))
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 this.taskTitle.paintFlags = if (isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0

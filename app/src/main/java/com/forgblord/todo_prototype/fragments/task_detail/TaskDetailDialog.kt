@@ -12,8 +12,6 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -29,6 +27,10 @@ import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog
+import com.forgblord.todo_prototype.utils.menuToPriority
+import com.forgblord.todo_prototype.utils.priorityToColor
+import com.forgblord.todo_prototype.utils.priorityToIcon
+import com.forgblord.todo_prototype.utils.priorityToString
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
@@ -189,13 +191,6 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
         }
     }
 
-    private fun updatePriority(priorityString: String): Int = when (priorityString) {
-        getString(R.string.priority_1) -> 1
-        getString(R.string.priority_2) -> 2
-        getString(R.string.priority_3) -> 3
-        else -> 4
-    }
-
     private fun showMenu(view: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(requireContext(), view)
         popup.menuInflater.inflate(menuRes, popup.menu)
@@ -207,9 +202,8 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
             binding.chipPriority.chipIconTint = it.iconTintList
 
             taskDetailViewModel.updateTask { oldTask ->
-//                    oldTask.copy(title=text.toString())
                 oldTask.copy(
-                    task=oldTask.task.copy(priority = updatePriority(it.title.toString()))
+                    task=oldTask.task.copy(priority = menuToPriority(binding.root.context, it.title.toString()))
                 )
             }
 
@@ -232,12 +226,11 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
             else DateFormat.getPatternInstance(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY)
                 .format(taskProject.task.date)
 
-            cbCompleted.buttonTintList = when (taskProject.task.priority) {
-                1 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.red_500))
-                2 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.yellow_500))
-                3 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.blue_500))
-                else -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.gray))
-            }
+            chipPriority.text = priorityToString(root.context, taskProject.task.priority)
+            chipPriority.chipIcon = priorityToIcon(root.context, taskProject.task.priority)
+            chipPriority.chipIconTint = ColorStateList.valueOf(priorityToColor(root.context, taskProject.task.priority))
+
+            cbCompleted.buttonTintList = ColorStateList.valueOf(priorityToColor(root.context, taskProject.task.priority))
             cbCompleted.isChecked = taskProject.task.completed
         }
     }

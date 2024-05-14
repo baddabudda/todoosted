@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             app:chipIcon="@drawable/ic_priority"
             app:chipBackgroundColor="@color/white"
-            android:text="@string/priority"/>
+            android:text="@string/short_priority_4"/>
     </com.google.android.material.chip.ChipGroup>
 
     <!--<com.google.android.material.divider.MaterialDivider

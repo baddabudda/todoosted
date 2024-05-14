@@ -14,7 +14,7 @@
             android:id="@+id/tv_priority_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/priority"
+            android:text="@string/menu_priority"
             android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -36,7 +36,7 @@
                 android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/ic_priority"
                 app:drawableTint="@color/red_500"
-                android:text="@string/priority_1"/>
+                android:text="@string/menu_priority_1"/>
 
             <TextView
                 android:id="@+id/priority_2"
@@ -48,7 +48,7 @@
                 android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/ic_priority"
                 app:drawableTint="@color/yellow_500"
-                android:text="@string/priority_2"/>
+                android:text="@string/menu_priority_2"/>
 
             <TextView
                 android:id="@+id/priority_3"
@@ -60,7 +60,7 @@
                 app:drawableStartCompat="@drawable/ic_priority"
                 android:drawablePadding="8dp"
                 app:drawableTint="@color/blue_500"
-                android:text="@string/priority_3"/>
+                android:text="@string/menu_priority_3"/>
 
             <TextView
                 android:id="@+id/priority_4"
@@ -72,7 +72,7 @@
                 android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/ic_priority_none"
                 app:drawableTint="@color/gray"
-                android:text="@string/priority_4"/>
+                android:text="@string/menu_priority_4"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

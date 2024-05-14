@@ -45,9 +45,9 @@ class PriorityDialog: DialogFragment() {
 
     private fun onPriorityPicked(priority: String) {
         val id = when(priority) {
-            getString(R.string.priority_1) -> 1
-            getString(R.string.priority_2) -> 2
-            getString(R.string.priority_3) -> 3
+            getString(R.string.menu_priority_1) -> 1
+            getString(R.string.menu_priority_2) -> 2
+            getString(R.string.menu_priority_3) -> 3
             else -> 4
         }
 
@@ -55,8 +55,6 @@ class PriorityDialog: DialogFragment() {
 
         setFragmentResult(REQUEST_KEY_PRIORITY, bundleOf(BUNDLE_KEY_ID to id,
                                                             BUNDLE_KEY_TITLE to text))
-
-
 
         dismiss()
     }

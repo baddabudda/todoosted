@@ -20,9 +20,14 @@
     <string name="dummyproject">Project Name</string>
 
     <string name="deadline_default">Due date</string>
-    <string name="priority">Priority</string>
-    <string name="priority_1">High Priority</string>
-    <string name="priority_2">Medium Priority</string>
-    <string name="priority_3">Low Priority</string>
-    <string name="priority_4">None</string>
+    <string name="menu_priority">Priority</string>
+    <string name="menu_priority_1">High Priority</string>
+    <string name="menu_priority_2">Medium Priority</string>
+    <string name="menu_priority_3">Low Priority</string>
+    <string name="menu_priority_4">None</string>
+
+    <string name="short_priority_1">High</string>
+    <string name="short_priority_2">Medium</string>
+    <string name="short_priority_3">Low</string>
+    <string name="short_priority_4">None</string>
 </resources>
