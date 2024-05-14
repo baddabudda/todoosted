@@ -9,7 +9,7 @@ import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.Task
 import java.lang.IllegalStateException
 
-@Database(entities = [Task::class, Project::class], version=4)
+@Database(entities = [Task::class, Project::class], version=5)
 @TypeConverters(TaskTypeConverter::class)
 abstract class TodoDatabase: RoomDatabase() {
     abstract fun taskDao(): TaskDao

@@ -36,7 +36,7 @@ class AddTaskDialog: BottomSheetDialogFragment() {
 
     var date: Date? = null
     var projectId: Int? = null
-    var priorityId: Int? = null
+    var priorityId: Int = 4
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +58,9 @@ class AddTaskDialog: BottomSheetDialogFragment() {
                 val newTask = Task(
                     task_id = 0,
                     proj_id = projectId,
-                    title=title,
-                    date=date)
+                    title = title,
+                    date = date,
+                    priority = priorityId)
                 taskCRUD.addTask(newTask)
                 findNavController().navigateUp()
             }
@@ -101,6 +102,13 @@ class AddTaskDialog: BottomSheetDialogFragment() {
         }*/
     }
 
+    private fun updatePriority(priorityString: String): Int = when (priorityString) {
+        getString(R.string.priority_1) -> 1
+        getString(R.string.priority_2) -> 2
+        getString(R.string.priority_3) -> 3
+        else -> 4
+    }
+
     private fun showMenu(view: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(requireContext(), view)
         popup.menuInflater.inflate(menuRes, popup.menu)
@@ -110,6 +118,7 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             binding.chipPriority.text = it.title.toString().substringBefore(" ")
             binding.chipPriority.chipIcon = it.icon
             binding.chipPriority.chipIconTint = it.iconTintList
+            priorityId = updatePriority(it.title.toString())
             popup.dismiss()
             true
         }

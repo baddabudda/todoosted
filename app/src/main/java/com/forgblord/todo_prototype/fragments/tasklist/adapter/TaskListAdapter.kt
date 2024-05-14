@@ -1,11 +1,14 @@
 package com.forgblord.todo_prototype.fragments.tasklist.adapter
 
+import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.icu.text.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.databinding.ItemTaskBinding
@@ -32,6 +35,13 @@ class TaskListViewHolder (
 
             taskItemViewgroup.setOnClickListener {
                 onTaskClicked(taskProject.task.task_id)
+            }
+
+            checkBox.buttonTintList = when (taskProject.task.priority) {
+                1 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.red_500))
+                2 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.yellow_500))
+                3 -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.blue_500))
+                else -> ColorStateList.valueOf(ContextCompat.getColor(root.context, R.color.gray))
             }
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->

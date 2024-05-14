@@ -24,4 +24,5 @@ data class Task (
     val title: String,
     var completed: Boolean = false,
     val date: Date?,
+    val priority: Int = 4,
 )
