@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/tv_priority_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/priority"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/tv_priority_title">
+
+            <TextView
+                android:id="@+id/priority_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawablePadding="8dp"
+                app:drawableStartCompat="@drawable/ic_priority"
+                app:drawableTint="@color/red_500"
+                android:text="@string/priority_1"/>
+
+            <TextView
+                android:id="@+id/priority_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawablePadding="8dp"
+                app:drawableStartCompat="@drawable/ic_priority"
+                app:drawableTint="@color/yellow_500"
+                android:text="@string/priority_2"/>
+
+            <TextView
+                android:id="@+id/priority_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:drawableStartCompat="@drawable/ic_priority"
+                android:drawablePadding="8dp"
+                app:drawableTint="@color/blue_500"
+                android:text="@string/priority_3"/>
+
+            <TextView
+                android:id="@+id/priority_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawablePadding="8dp"
+                app:drawableStartCompat="@drawable/ic_priority_none"
+                app:drawableTint="@color/gray"
+                android:text="@string/priority_4"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

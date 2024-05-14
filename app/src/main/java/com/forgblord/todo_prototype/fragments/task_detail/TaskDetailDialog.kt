@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
-import android.widget.Toast
+import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResultListener
@@ -20,13 +20,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.R
-import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
-import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
+import com.forgblord.todo_prototype.data.viewmodels.TaskDetailCRUD
 import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
 import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
-import com.forgblord.todo_prototype.fragments.dialogs.ConfirmDiscardDialog
 import com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -42,7 +40,7 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val taskDetailViewModel: TaskDetailViewModel by viewModels {
+    private val taskDetailViewModel: TaskDetailCRUD by viewModels {
         TaskDetailViewModelFactory(args.taskId)
     }
 
@@ -135,6 +133,10 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
                 findNavController().navigate(TaskDetailDialogDirections.selectDate())
             }
 
+            chipPriority.setOnClickListener {
+                showMenu(it, R.menu.menu_priority)
+            }
+
             btnDeleteTask.setOnClickListener {
                 _task?.let { it1 -> taskDetailViewModel.deleteTask(it1.task) }
                 findNavController().popBackStack()
@@ -182,6 +184,22 @@ class TaskDetailDialog: BottomSheetDialogFragment() {
                 }
             }
         }
+    }
+
+    private fun showMenu(view: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+        popup.setForceShowIcon(true)
+
+        popup.setOnMenuItemClickListener {
+            binding.chipPriority.text = it.title.toString().substringBefore(" ")
+            binding.chipPriority.chipIcon = it.icon
+            binding.chipPriority.chipIconTint = it.iconTintList
+            popup.dismiss()
+            true
+        }
+
+        popup.show()
     }
 
     private fun updateUI(taskProject: TaskProject) {

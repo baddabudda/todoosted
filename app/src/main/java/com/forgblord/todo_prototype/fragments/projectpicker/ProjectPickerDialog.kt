@@ -13,9 +13,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Project
-import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
+import com.forgblord.todo_prototype.data.viewmodels.BrowseViewModel
 import com.forgblord.todo_prototype.databinding.FragmentProjectPickBinding
 import com.forgblord.todo_prototype.fragments.projectpicker.adapter.ProjectListAdapter
 import kotlinx.coroutines.launch
@@ -29,7 +28,7 @@ class ProjectPickerDialog: DialogFragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val projectViewModel: ProjectViewModel by viewModels()
+    private val browseViewModel: BrowseViewModel by viewModels()
 
     override fun onStart() {
         super.onStart()
@@ -61,7 +60,7 @@ class ProjectPickerDialog: DialogFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                projectViewModel.projectList.collect { list ->
+                browseViewModel.projectList.collect { list ->
                     binding.rvProjects.adapter = ProjectListAdapter(list) { project -> onProjectPicked(project) }
                 }
             }

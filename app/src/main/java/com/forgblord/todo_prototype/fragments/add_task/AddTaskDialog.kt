@@ -1,22 +1,27 @@
 package com.forgblord.todo_prototype.fragments.add_task
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.InsetDrawable
 import android.icu.text.DateFormat
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MenuRes
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.forgblord.todo_prototype.data.models.Project
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskVM
-import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
+import com.forgblord.todo_prototype.data.viewmodels.TaskCRUD
 import com.forgblord.todo_prototype.databinding.FragmentAddTaskSheetBinding
 import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
+import com.forgblord.todo_prototype.fragments.dialogs.PriorityDialog
 import com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Date
 
@@ -27,10 +32,11 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val taskViewModel: TaskVM by viewModels()
+    private val taskCRUD: TaskCRUD by viewModels()
 
     var date: Date? = null
     var projectId: Int? = null
+    var priorityId: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +60,7 @@ class AddTaskDialog: BottomSheetDialogFragment() {
                     proj_id = projectId,
                     title=title,
                     date=date)
-                taskViewModel.addTask(newTask)
+                taskCRUD.addTask(newTask)
                 findNavController().navigateUp()
             }
 
@@ -64,6 +70,11 @@ class AddTaskDialog: BottomSheetDialogFragment() {
 
             chipProject.setOnClickListener {
                 findNavController().navigate(AddTaskDialogDirections.actionAddTaskToProjectPicker())
+            }
+
+            chipPriority.setOnClickListener {
+                showMenu(it, R.menu.menu_priority)
+//                findNavController().navigate(AddTaskDialogDirections.actionAddTaskToPriorityDialog())
             }
 
         }
@@ -83,6 +94,27 @@ class AddTaskDialog: BottomSheetDialogFragment() {
             projectId = projId
             binding.chipProject.text = projectTitle.toString()
         }
+
+        /*setFragmentResultListener(PriorityDialog.REQUEST_KEY_PRIORITY) { _, bundle ->
+            priorityId = bundle.getInt(PriorityDialog.BUNDLE_KEY_ID)
+            binding.chipPriority.text = bundle.getString(PriorityDialog.BUNDLE_KEY_TITLE)
+        }*/
+    }
+
+    private fun showMenu(view: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+        popup.setForceShowIcon(true)
+
+        popup.setOnMenuItemClickListener {
+            binding.chipPriority.text = it.title.toString().substringBefore(" ")
+            binding.chipPriority.chipIcon = it.icon
+            binding.chipPriority.chipIconTint = it.iconTintList
+            popup.dismiss()
+            true
+        }
+
+        popup.show()
     }
 
     override fun onDestroyView() {

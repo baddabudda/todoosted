@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_addTask_to_projectPicker"
             app:destination="@id/projectPickerDialog" />
+        <action
+            android:id="@+id/action_addTask_to_priorityDialog"
+            app:destination="@id/priorityDialog" />
     </dialog>
 
     <dialog
@@ -55,5 +58,9 @@
             android:id="@+id/action_taskDetail_to_projectPicker"
             app:destination="@id/projectPickerDialog" />
     </dialog>
+    <dialog
+        android:id="@+id/priorityDialog"
+        android:name="com.forgblord.todo_prototype.fragments.dialogs.PriorityDialog"
+        android:label="PriorityDialog" />
 
 </navigation>

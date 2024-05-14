@@ -22,4 +22,9 @@ interface ProjectDao {
 
     @Update
     suspend fun updateProject(project: Project)
+
+    @Query(
+        "SELECT * FROM project WHERE project_id = :id"
+    )
+    fun getProjectById(id: Int): Flow<Project>
 }

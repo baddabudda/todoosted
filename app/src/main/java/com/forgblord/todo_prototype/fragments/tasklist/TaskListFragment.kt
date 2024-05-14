@@ -3,37 +3,25 @@ package com.forgblord.todo_prototype.fragments.tasklist
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.forgblord.todo_prototype.R
+import com.forgblord.todo_prototype.NavBottombarDirections
 import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskVM
-import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
+import com.forgblord.todo_prototype.data.viewmodels.TaskCRUD
 import com.forgblord.todo_prototype.databinding.FragmentTasklistBinding
-import com.forgblord.todo_prototype.fragments.tasklist.adapter.TaskListAdapter
-import kotlinx.coroutines.launch
 
-abstract class TaskListFragment(): Fragment() {
+open class TaskListFragment(): Fragment() {
     private var _binding: FragmentTasklistBinding? = null
-    private val binding
+    protected val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    protected val taskListViewModel: TaskViewModel by viewModels()
-    private val taskModel: TaskVM by viewModels()
-
-    abstract fun openTask(taskId: Int)
-    abstract fun initializeList()
+    protected val taskModel: TaskCRUD by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,12 +31,10 @@ abstract class TaskListFragment(): Fragment() {
         _binding = FragmentTasklistBinding.inflate(inflater, container, false)
         binding.rvTaskList.layoutManager = LinearLayoutManager(context)
 
-        initializeList()
-
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -61,9 +47,13 @@ abstract class TaskListFragment(): Fragment() {
                 }
             }
         }
+    }*/
+
+    protected fun openTask(taskId: Int) {
+        findNavController().navigate(NavBottombarDirections.openTask(taskId))
     }
 
-    private fun updateOnCheck(task: Task) {
+    protected fun updateOnCheck(task: Task) {
         taskModel.updateTask(task)
     }
 

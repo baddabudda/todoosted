@@ -1,11 +1,9 @@
-package com.forgblord.todo_prototype.data.viewmodels
+package com.forgblord.todo_prototype.data.viewmodels.legacy
 
 import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Project
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class ProjectListViewModel: ViewModel() {

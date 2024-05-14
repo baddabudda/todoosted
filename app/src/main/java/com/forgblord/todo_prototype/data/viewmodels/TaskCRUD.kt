@@ -1,18 +1,16 @@
 package com.forgblord.todo_prototype.data.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.repository.TodoRepository
 import kotlinx.coroutines.launch
 
-open class TaskVM: ViewModel() {
+open class TaskCRUD: ViewModel() {
     private val todoRepository: TodoRepository = TodoRepository.getInstance()
 
     fun addTask(task: Task) {
         viewModelScope.launch {
-            Log.d("TASK", "$task")
             todoRepository.addTask(task)
         }
     }

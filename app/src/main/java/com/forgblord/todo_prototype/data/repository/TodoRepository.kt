@@ -73,4 +73,6 @@ class TodoRepository private constructor(
 
     fun getInbox(): Flow<List<TaskProject>> = taskDao.getInbox()
 
+    fun getProjectById(id: Int): Flow<Project> = projectDao.getProjectById(id)
+
 }

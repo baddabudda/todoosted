@@ -1,9 +1,7 @@
 package com.forgblord.todo_prototype.fragments.browse
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.data.models.Project
-import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
+import com.forgblord.todo_prototype.data.viewmodels.ProjectCRUD
 import com.forgblord.todo_prototype.databinding.FragmentAddProjectSheetBinding
 import com.forgblord.todo_prototype.fragments.dialogs.ColorPickerDialog
 import com.forgblord.todo_prototype.utils.ProjectColors
@@ -30,7 +28,7 @@ class AddProjectFragment : BottomSheetDialogFragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val projectViewModel: ProjectViewModel by viewModels()
+    private val projectCRUD: ProjectCRUD by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         project = args.project
@@ -98,7 +96,7 @@ class AddProjectFragment : BottomSheetDialogFragment() {
             colorCode=color
         )
 
-        if (editMode) projectViewModel.updateProject(project)
-        else projectViewModel.addProject(project)
+        if (editMode) projectCRUD.updateProject(project)
+        else projectCRUD.addProject(project)
     }
 }

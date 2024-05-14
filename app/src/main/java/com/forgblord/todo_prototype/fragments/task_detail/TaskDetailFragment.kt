@@ -1,29 +1,5 @@
 package com.forgblord.todo_prototype.fragments.task_detail
 
-import android.icu.text.DateFormat
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.activity.addCallback
-import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModel
-import com.forgblord.todo_prototype.data.viewmodels.TaskDetailViewModelFactory
-import com.forgblord.todo_prototype.databinding.FragmentTaskDetailsBinding
-import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
-import com.forgblord.todo_prototype.utils.popOnBackPress
-import kotlinx.coroutines.launch
-import java.util.Date
-
 /*
 class TaskDetailFragment: Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()

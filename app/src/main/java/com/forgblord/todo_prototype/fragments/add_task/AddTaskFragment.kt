@@ -1,20 +1,14 @@
 package com.forgblord.todo_prototype.fragments.add_task
 
-import android.icu.text.DateFormat
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.forgblord.todo_prototype.MainActivity
-import com.forgblord.todo_prototype.data.models.Task
-import com.forgblord.todo_prototype.data.viewmodels.TaskViewModel
 import com.forgblord.todo_prototype.databinding.FragmentTaskAddBinding
-import com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment
 import java.util.Date
 
 class AddTaskFragment : Fragment() {
@@ -23,8 +17,6 @@ class AddTaskFragment : Fragment() {
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
-
-    val taskListViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

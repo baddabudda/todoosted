@@ -5,9 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,11 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.forgblord.todo_prototype.R
-import com.forgblord.todo_prototype.data.models.Project
-import com.forgblord.todo_prototype.data.viewmodels.ProjectViewModel
+import com.forgblord.todo_prototype.data.viewmodels.BrowseViewModel
 import com.forgblord.todo_prototype.databinding.FragmentBrowseBinding
-import com.forgblord.todo_prototype.fragments.browse.BrowseFragmentDirections
 import com.forgblord.todo_prototype.fragments.browse.adapter.ProjectListAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,7 +27,7 @@ class BrowseFragment: Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val projectViewModel: ProjectViewModel by viewModels()
+    private val browseViewModel: BrowseViewModel by viewModels()
 
     private var prevSize: Int = 0
 
@@ -56,7 +50,7 @@ class BrowseFragment: Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                projectViewModel.projectList.collectLatest { list ->
+                browseViewModel.projectList.collectLatest { list ->
                     binding.projectList.adapter = ProjectListAdapter(list) { project ->
                         findNavController().navigate(BrowseFragmentDirections.actionBrowseToProject(project))
                     }

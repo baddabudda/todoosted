@@ -31,7 +31,6 @@
     <fragment
         android:id="@+id/projectFragment"
         android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
-        android:label="Project"
         tools:layout="@layout/fragment_tasklist">
         <argument
             android:name="project"
