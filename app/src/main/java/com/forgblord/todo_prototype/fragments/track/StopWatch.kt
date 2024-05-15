@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.data.models.TimeRecord
 import com.forgblord.todo_prototype.data.viewmodels.RecordCRUD
 import com.forgblord.todo_prototype.databinding.FragmentTrackBinding
@@ -27,6 +28,8 @@ class StopWatch: Fragment() {
 
     private var _record: TimeRecord? = null
 
+    private val args: StopWatchArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,12 +46,14 @@ class StopWatch: Fragment() {
         binding.btnStart.setOnClickListener {
             val record = TimeRecord(
                 record_id = 0,
-                task_id = 1,
+                task_id = args.taskId,
                 datetime_start = Date(),
                 datetime_end = null
             )
             recordModel.addRecord(record)
         }
+
+        binding.tvRecordId.text = args.taskId.toString()
 
         binding.btnStop.setOnClickListener {
             val toUpdate = _record!!.copy(datetime_end = Date())
@@ -60,7 +65,7 @@ class StopWatch: Fragment() {
                 recordModel.record.collect { flowRecord ->
                     _record = flowRecord
                     println(_record)
-                    binding.tvRecordId.text = (_record?.record_id ?: "None").toString()
+//                    binding.tvRecordId.text = (_record?.record_id ?: "None").toString()
                 }
             }
         }

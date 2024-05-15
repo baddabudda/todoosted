@@ -59,7 +59,8 @@ class ProjectFragment: TaskListFragment() {
 
                     binding.rvTaskList.adapter = TaskListAdapter(projectState.projectList,
                         { task -> updateOnCheck(task)},
-                        { taskId -> openTask(taskId) }
+                        { taskId -> openTask(taskId) },
+                        { taskTitle -> actionToTrack(taskTitle) }
                     )
                 }
             }

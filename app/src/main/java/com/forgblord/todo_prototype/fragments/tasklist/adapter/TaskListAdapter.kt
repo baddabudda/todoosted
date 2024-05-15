@@ -15,6 +15,7 @@ import com.forgblord.todo_prototype.utils.priorityToColor
 class TaskListViewHolder (
     private val binding: ItemTaskBinding,
     private val onCheckListener: (task: Task) -> Unit,
+    private val onTrackClicked: (taskId: Int) -> Unit,
 ): RecyclerView.ViewHolder(binding.root) {
     fun bind(taskProject: TaskProject, onTaskClicked: (id: Int) -> Unit, updateList: (position: Int) -> Unit) {
         binding.apply {
@@ -45,6 +46,10 @@ class TaskListViewHolder (
                 updateList(absoluteAdapterPosition)
                 onCheckListener(taskProject.task)
             }
+
+            btnStartTrack.setOnClickListener {
+                onTrackClicked(taskProject.task.task_id)
+            }
         }
     }
 }
@@ -53,13 +58,14 @@ class TaskListAdapter (
     private val tasks: List<TaskProject>,
     private val onCheckListener: (task: Task) -> Unit,
     private val onItemClickListener: (id: Int) -> Unit,
+    private val onTrackClicked: (taskId: Int) -> Unit,
 ): RecyclerView.Adapter<TaskListViewHolder>() {
     private var onBind: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemTaskBinding.inflate(inflater, parent, false)
-        return TaskListViewHolder(binding, onCheckListener)
+        return TaskListViewHolder(binding, onCheckListener, onTrackClicked)
     }
 
     override fun getItemCount(): Int {

@@ -7,5 +7,12 @@
     <fragment
         android:id="@+id/trackFragment"
         android:name="com.forgblord.todo_prototype.fragments.track.StopWatch"
-        android:label="Track" />
+        android:label="Track">
+<!--        <deepLink-->
+<!--            app:uri="android-app://com.forgblord.todo_prototype/fragments/track/Stopwatch" />-->
+        <argument
+            android:name="task_id"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

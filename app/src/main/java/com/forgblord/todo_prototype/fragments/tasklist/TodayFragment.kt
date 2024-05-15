@@ -21,7 +21,8 @@ class TodayFragment: TaskListFragment() {
                 todayViewModel.taskList.collect { list ->
                     binding.rvTaskList.adapter = TaskListAdapter(list,
                         { task -> updateOnCheck(task)},
-                        { taskId -> openTask(taskId) }
+                        { taskId -> openTask(taskId) },
+                        { taskTitle -> actionToTrack(taskTitle) }
                     )
                 }
             }

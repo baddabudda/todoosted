@@ -1,5 +1,6 @@
 package com.forgblord.todo_prototype.fragments.tasklist
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.forgblord.todo_prototype.MainActivity
 import com.forgblord.todo_prototype.NavBottombarDirections
+import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskCRUD
 import com.forgblord.todo_prototype.databinding.FragmentTasklistBinding
@@ -55,6 +58,12 @@ open class TaskListFragment(): Fragment() {
 
     protected fun updateOnCheck(task: Task) {
         taskModel.updateTask(task)
+    }
+
+    protected fun actionToTrack(id: Int) {
+        (activity as MainActivity).mbinding.bottomNavigation.selectedItemId = R.id.track
+        findNavController().navigate(NavBottombarDirections.startTrack(id))
+//        findNavController().navigate(Uri.parse("android-app://com.forgblord.todo_prototype/fragments/track/Stopwatch/{$title}"))
     }
 
     override fun onDestroyView() {
