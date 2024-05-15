@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/trackFragment"
-        android:name="com.forgblord.todo_prototype.fragments.track.TrackFragment"
+        android:name="com.forgblord.todo_prototype.fragments.track.StopWatch"
         android:label="Track" />
 </navigation>

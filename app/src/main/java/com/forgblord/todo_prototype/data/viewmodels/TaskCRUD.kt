@@ -26,5 +26,4 @@ open class TaskCRUD: ViewModel() {
             todoRepository.deleteTask(task)
         }
     }
-
 }

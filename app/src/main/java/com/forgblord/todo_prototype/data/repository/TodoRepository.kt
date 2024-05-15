@@ -1,11 +1,13 @@
 package com.forgblord.todo_prototype.data.repository
 
 import com.forgblord.todo_prototype.data.ProjectDao
+import com.forgblord.todo_prototype.data.RecordDao
 import com.forgblord.todo_prototype.data.TaskDao
 import com.forgblord.todo_prototype.data.TodoDatabase
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
+import com.forgblord.todo_prototype.data.models.TimeRecord
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +16,7 @@ import kotlinx.coroutines.launch
 class TodoRepository private constructor(
     private val taskDao: TaskDao = TodoDatabase.get().taskDao(),
     private val projectDao: ProjectDao = TodoDatabase.get().projectDao(),
+    private val recordDao: RecordDao = TodoDatabase.get().recordDao(),
     private val coroutineScope: CoroutineScope = GlobalScope,
 ) {
     /*private val database: TodoDatabase = Room
@@ -75,4 +78,13 @@ class TodoRepository private constructor(
 
     fun getProjectById(id: Int): Flow<Project> = projectDao.getProjectById(id)
 
+    suspend fun addRecord(record: TimeRecord) {
+        recordDao.addRecord(record)
+    }
+
+    suspend fun updateRecord(record: TimeRecord) {
+        recordDao.updateRecord(record)
+    }
+
+    suspend fun getActiveRecord(): TimeRecord = recordDao.getActiveRecord()
 }
