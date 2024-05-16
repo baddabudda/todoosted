@@ -104,7 +104,7 @@ class TrackFragment: Fragment() {
         val hours = timeElapsed % 86400 / 3600
         val minutes = timeElapsed % 86400 % 3600 / 60
         val seconds = timeElapsed % 86400 % 3600 % 60
-        binding.textView.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+        binding.tvStopwatch.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     private fun getTimerStatus() {

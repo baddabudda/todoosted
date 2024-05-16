@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.forgblord.todo_prototype.R
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.viewmodels.TaskCRUD
 import com.forgblord.todo_prototype.databinding.FragmentTasklistBinding
+import com.forgblord.todo_prototype.fragments.track.StopWatch
 
 open class TaskListFragment(): Fragment() {
     private var _binding: FragmentTasklistBinding? = null
@@ -60,9 +62,9 @@ open class TaskListFragment(): Fragment() {
         taskModel.updateTask(task)
     }
 
-    protected fun actionToTrack(id: Int) {
+    protected fun actionToTrack(taskId: Int) {
         (activity as MainActivity).mbinding.bottomNavigation.selectedItemId = R.id.track
-        findNavController().navigate(NavBottombarDirections.startTrack(id))
+        findNavController().navigate(R.id.start_track, bundleOf(StopWatch.taskKey to taskId))
 //        findNavController().navigate(Uri.parse("android-app://com.forgblord.todo_prototype/fragments/track/Stopwatch/{$title}"))
     }
 

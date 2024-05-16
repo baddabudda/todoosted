@@ -10,7 +10,7 @@ import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TimeRecord
 import java.lang.IllegalStateException
 
-@Database(entities = [Task::class, Project::class, TimeRecord::class], version=6)
+@Database(entities = [Task::class, Project::class, TimeRecord::class], version=7)
 @TypeConverters(TaskTypeConverter::class)
 abstract class TodoDatabase: RoomDatabase() {
     abstract fun taskDao(): TaskDao

@@ -48,12 +48,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start_track"
-        style="@style/Widget.Material3.Button.OutlinedButton"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:insetTop="10dp"
-        android:insetBottom="10dp"
         app:icon="@drawable/ic_start"
         app:layout_constraintBottom_toBottomOf="@+id/task_title"
         app:layout_constraintEnd_toEndOf="parent"

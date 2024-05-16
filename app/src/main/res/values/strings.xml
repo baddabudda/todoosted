@@ -30,4 +30,7 @@
     <string name="short_priority_2">Medium</string>
     <string name="short_priority_3">Low</string>
     <string name="short_priority_4">None</string>
+
+    <string name="stopwatch_test_task_id">Task id is: %1$d</string>
+    <string name="stopwatch_test_record_id">Record id is: %1$d</string>
 </resources>

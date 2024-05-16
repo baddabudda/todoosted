@@ -16,9 +16,6 @@
     <action
         android:id="@+id/start_track"
         app:destination="@+id/track">
-        <argument
-            android:name="task_id"
-            app:argType="integer" />
     </action>
 
     <include app:graph="@navigation/nav_inbox"/>

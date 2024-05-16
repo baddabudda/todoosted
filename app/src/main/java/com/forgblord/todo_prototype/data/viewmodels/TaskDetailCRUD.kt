@@ -23,7 +23,6 @@ class TaskDetailCRUD(
     init {
         viewModelScope.launch {
             _task.value = todoRepository.getTaskById(taskId)
-            Log.d("TASK", "${_task.value}")
         }
     }
 
