@@ -31,6 +31,10 @@
     <string name="short_priority_3">Low</string>
     <string name="short_priority_4">None</string>
 
+
+    <string name="stopwatch_task_none">No active task. Select task from project page to start tracking</string>
+    <string name="stopwatch_task_passed">Ready to track task with id %1$d</string>
+    <string name="stopwatch_task_tracking">Currently tracking task with id %1$d</string>
     <string name="stopwatch_test_task_id">Task id is: %1$d</string>
     <string name="stopwatch_test_record_id">Record id is: %1$d</string>
 </resources>

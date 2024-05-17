@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.forgblord.todo_prototype.databinding.ActivityMainBinding
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val bottomNavBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavBar.setupWithNavController(navController)
+//        bottomNavBar.setupWithNavController(navController)
+        NavigationUI.setupWithNavController(bottomNavBar, navController, false)
 
         bottomNavBar.setOnItemReselectedListener { menuItem ->
             val destination = when (menuItem.title) {

@@ -46,9 +46,9 @@ class TrackFragment: Fragment() {
             else startTimer()
         }
 
-        binding.btnStop.setOnClickListener {
+        /*binding.btnStop.setOnClickListener {
             resetTimer()
-        }
+        }*/
 
         return binding.root
     }

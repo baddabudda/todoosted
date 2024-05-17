@@ -30,8 +30,20 @@ class StopwatchModel(
     private var seconds = "00"
     private var minutes = "00"
     private var hours = "00"
-
     val timeString = MutableLiveData("00:00:00")
+
+    val state = MutableLiveData(State.STOPPED)
+
+    init {
+        viewModelScope.launch {
+            _record.value = todoRepository.getActiveRecord()
+            if (_record.value != null) {
+                println("GOT CURRENT VALUE")
+                duration = (Date().time / 1000L).seconds - (_record.value!!.datetime_start.time / 1000L).seconds
+                startStopwatch()
+            }
+        }
+    }
 
     private fun addRecord() {
         if (_taskId != 0) {
@@ -58,49 +70,42 @@ class StopwatchModel(
         }
     }
 
-    fun requestAction(action: Action, taskId: Int? = null) {
+    fun requestAction(action: Action, taskId: Int = 0) {
+        println("Current state is: ${state.value}")
         when(action) {
             Action.START -> {
-                if (taskId != null && taskId != _taskId) {
-                    if (_record.value != null) stop()
-                    resetTimeUnits()
-
-                    _taskId = taskId
-                    start()
-                }
+                if (state.value == State.RUNNING) cancelStopwatch(true)
+                _taskId = taskId
+                addRecord()
+                startStopwatch()
             }
-            Action.STOP -> stop()
+            Action.STOP -> {
+                cancelStopwatch(true)
+            }
         }
     }
 
-    private fun start() {
-        addRecord()
+    private fun startStopwatch() {
+        state.value = State.RUNNING
 
         timer = fixedRateTimer(
             initialDelay = 1000L,
             period = 1000L
         ) {
             duration = duration.plus(1.seconds)
-//            println("Running")
             updateTimeUnits()
         }
     }
 
-    private fun stop() {
+    private fun cancelStopwatch(requireClose: Boolean) {
+        state.value = State.STOPPED
+
         if (this::timer.isInitialized) {
             timer.cancel()
-            closeRecord(_record.value!!.copy(datetime_end = Date()))
         }
-    }
 
-    fun initTimeUnits(dur: Long, hh: Long, mm: Long, ss: Long) {
-        duration = dur.seconds
-
-        hours = hh.toString().padStart(2, '0')
-        minutes = mm.toString().padStart(2, '0')
-        seconds = ss.toString().padStart(2, '0')
-
-        timeString.value = "${this.hours}:${this.minutes}:${this.seconds}"
+        resetTimeUnits()
+        if (requireClose) closeRecord(_record.value!!.copy(datetime_end = Date()))
     }
 
     private fun resetTimeUnits() {
@@ -123,9 +128,19 @@ class StopwatchModel(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        println("onCleared!")
+    }
+
     enum class Action {
         START,
         STOP
+    }
+
+    enum class State {
+        RUNNING,
+        STOPPED
     }
 }
 

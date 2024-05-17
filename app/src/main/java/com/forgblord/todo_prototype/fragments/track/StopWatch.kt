@@ -11,16 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.navArgs
 import com.forgblord.todo_prototype.R
-import com.forgblord.todo_prototype.data.models.TimeRecord
-import com.forgblord.todo_prototype.data.viewmodels.RecordCRUD
 import com.forgblord.todo_prototype.data.viewmodels.StopwatchModel
 import com.forgblord.todo_prototype.databinding.FragmentTrackBinding
-import com.forgblord.todo_prototype.utils.StopwatchCounter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.Date
 
 class StopWatch: Fragment() {
     private var _binding: FragmentTrackBinding? = null
@@ -50,16 +44,35 @@ class StopWatch: Fragment() {
 
         stopwatch.timeString.observe(viewLifecycleOwner, timeObserver)
 
+        val buttonStateObserver = Observer<StopwatchModel.State> {
+            when (it) {
+                StopwatchModel.State.RUNNING -> {
+                    binding.btnStart.visibility = View.GONE
+                    binding.btnStop.visibility = View.VISIBLE
+                }
+                StopwatchModel.State.STOPPED -> {
+                    binding.btnStart.visibility = View.VISIBLE
+                    binding.btnStop.visibility = View.GONE
+                }
+            }
+        }
+
+        stopwatch.state.observe(viewLifecycleOwner, buttonStateObserver)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("New task id: ${arguments?.getInt(taskKey)}")
 
-        binding.btnStart.setOnClickListener {
-            stopwatch.requestAction(StopwatchModel.Action.START, arguments?.getInt(taskKey))
+        arguments?.let { bundle ->
+            println("New task id: ${bundle.getInt(taskKey)}")
+            stopwatch.requestAction(StopwatchModel.Action.START, bundle.getInt(taskKey))
         }
+
+        /*binding.btnStart.setOnClickListener {
+            stopwatch.requestAction(StopwatchModel.Action.START, arguments?.getInt(taskKey))
+        }*/
 
         binding.btnStop.setOnClickListener {
             stopwatch.requestAction(StopwatchModel.Action.STOP)
@@ -68,8 +81,9 @@ class StopWatch: Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 stopwatch.record.collect { flowRecord ->
-                    binding.tvTaskId.text = requireContext().getString(R.string.stopwatch_test_task_id, flowRecord?.task_id)
-                    binding.tvRecordId.text = requireContext().getString(R.string.stopwatch_test_record_id, flowRecord?.record_id)
+                    binding.tvTask.text = flowRecord?.let {
+                         getString(R.string.stopwatch_task_tracking, it.task_id)
+                    } ?: getString(R.string.stopwatch_task_none)
                 }
             }
         }
@@ -77,6 +91,12 @@ class StopWatch: Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+//        stopwatch.requestAction(StopwatchModel.Action.STOP)
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("Stopwatch destroyed")
     }
 }

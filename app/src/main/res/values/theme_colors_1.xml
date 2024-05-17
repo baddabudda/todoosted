@@ -5,6 +5,7 @@
     <color name="purple_light_alpha20">#33907AD6</color>
     <color name="white_neutral">#FFFFFF</color>
     <color name="gray">#787878</color>
+    <color name="light_gray">#A6787878</color>
     <color name="white_darkened">#F8F8F8</color>
     <color name="black_alpha20">#33000000</color>
     <color name="black_alpha50">#80000000</color>

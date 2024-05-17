@@ -10,25 +10,36 @@
         android:id="@+id/tv_stopwatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="150dp"
         android:text="00:00:00"
-        android:textSize="80sp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <TextView
+        android:id="@+id/tv_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="@string/stopwatch_task_none"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/container_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stopwatch" />
+
+    <LinearLayout
+        android:id="@+id/container_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/tv_record_id"
-        tools:layout_editor_absoluteX="40dp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_start"
@@ -36,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:clickable="false"
+            android:backgroundTint="@color/light_gray"
             app:icon="@drawable/ic_start" />
 
         <com.google.android.material.button.MaterialButton
@@ -48,7 +61,15 @@
 
     </LinearLayout>
 
-    <TextView
+    <!--<com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track history"
+        style="@style/Widget.Material3.Button.TextButton"
+        app:icon="@drawable/ic_chevron"
+        app:iconGravity="end"/>-->
+
+    <!--<TextView
         android:id="@+id/tv_task_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,9 +80,9 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_stopwatch" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_stopwatch" />-->
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tv_record_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,6 +92,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_task_id" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_id" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
