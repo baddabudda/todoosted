@@ -3,6 +3,7 @@ package com.forgblord.todo_prototype.data.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.forgblord.todo_prototype.data.models.RecordTask
 import com.forgblord.todo_prototype.data.models.TimeRecord
 import com.forgblord.todo_prototype.data.repository.TodoRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +20,8 @@ class StopwatchModel(
 //    val taskId: Int?,
 ): ViewModel() {
     private val todoRepository: TodoRepository = TodoRepository.getInstance()
-    private val _record: MutableStateFlow<TimeRecord?> = MutableStateFlow(null)
-    val record: StateFlow<TimeRecord?> = _record.asStateFlow()
+    private val _record: MutableStateFlow<RecordTask?> = MutableStateFlow(null)
+    val record: StateFlow<RecordTask?> = _record.asStateFlow()
 
     private var _taskId: Int = 0
 
@@ -36,10 +37,10 @@ class StopwatchModel(
 
     init {
         viewModelScope.launch {
-            _record.value = todoRepository.getActiveRecord()
-            if (_record.value != null) {
-                println("GOT CURRENT VALUE")
-                duration = (Date().time / 1000L).seconds - (_record.value!!.datetime_start.time / 1000L).seconds
+            val tmp = todoRepository.getActiveRecord()
+            if (tmp.isNotEmpty()) {
+                _record.value = tmp[0]
+                duration = (Date().time / 1000L).seconds - (_record.value!!.record.datetime_start.time / 1000L).seconds
                 startStopwatch()
             }
         }
@@ -56,7 +57,7 @@ class StopwatchModel(
 
             viewModelScope.launch {
                 todoRepository.addRecord(record)
-                _record.value = todoRepository.getActiveRecord()
+                _record.value = todoRepository.getActiveRecord()[0]
                 println("Adding. Record is : ${_record.value}")
             }
         }
@@ -105,7 +106,10 @@ class StopwatchModel(
         }
 
         resetTimeUnits()
-        if (requireClose) closeRecord(_record.value!!.copy(datetime_end = Date()))
+        if (requireClose) {
+            println(_record.value!!.record)
+            closeRecord(_record.value!!.record.copy(datetime_end = Date()))
+        }
     }
 
     private fun resetTimeUnits() {

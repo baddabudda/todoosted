@@ -10,32 +10,32 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RecordCRUD: ViewModel() {
-    private val todoRepository: TodoRepository = TodoRepository.getInstance()
+    /*private val todoRepository: TodoRepository = TodoRepository.getInstance()
 
     private val _record: MutableStateFlow<TimeRecord?> = MutableStateFlow(null)
-    val record: StateFlow<TimeRecord?> = _record.asStateFlow()
+    val record: StateFlow<TimeRecord?> = _record.asStateFlow()*/
 
-    init {
+    /*init {
         getActiveRecord()
-    }
+    }*/
 
-    fun addRecord(record: TimeRecord) {
+    /*fun addRecord(record: TimeRecord) {
         viewModelScope.launch {
             todoRepository.addRecord(record)
             getActiveRecord()
         }
-    }
+    }*/
 
-    fun updateRecord(record: TimeRecord) {
+    /*fun updateRecord(record: TimeRecord) {
         viewModelScope.launch {
             todoRepository.updateRecord(record)
             getActiveRecord()
         }
-    }
+    }*/
 
-    private fun getActiveRecord() {
+    /*private fun getActiveRecord() {
         viewModelScope.launch {
             _record.value = todoRepository.getActiveRecord()
         }
-    }
+    }*/
 }

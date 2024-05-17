@@ -7,6 +7,7 @@ import com.forgblord.todo_prototype.data.TodoDatabase
 import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
+import com.forgblord.todo_prototype.data.models.RecordTask
 import com.forgblord.todo_prototype.data.models.TimeRecord
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -86,5 +87,5 @@ class TodoRepository private constructor(
         recordDao.updateRecord(record)
     }
 
-    suspend fun getActiveRecord(): TimeRecord = recordDao.getActiveRecord()
+    suspend fun getActiveRecord(): List<RecordTask> = recordDao.getActiveRecord()
 }

@@ -82,7 +82,7 @@ class StopWatch: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 stopwatch.record.collect { flowRecord ->
                     binding.tvTask.text = flowRecord?.let {
-                         getString(R.string.stopwatch_task_tracking, it.task_id)
+                         getString(R.string.stopwatch_task_tracking, it.task.title)
                     } ?: getString(R.string.stopwatch_task_none)
                 }
             }
