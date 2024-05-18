@@ -8,7 +8,7 @@ import com.forgblord.todo_prototype.data.models.Project
 import com.forgblord.todo_prototype.data.models.Task
 import com.forgblord.todo_prototype.data.models.TaskProject
 import com.forgblord.todo_prototype.data.models.RecordTask
-import com.forgblord.todo_prototype.data.models.TaskRecords
+import com.forgblord.todo_prototype.data.models.TaskRecord
 import com.forgblord.todo_prototype.data.models.TimeRecord
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -90,5 +90,11 @@ class TodoRepository private constructor(
 
     suspend fun getActiveRecord(): List<RecordTask> = recordDao.getActiveRecord()
 
-    fun getAllRecord(): Flow<List<TaskRecords>> = recordDao.getAllRecords()
+    suspend fun deleteRecord(record: TimeRecord) {
+        recordDao.deleteRecord(record)
+    }
+
+    fun getAllRecord(): Flow<List<TaskRecord>> = recordDao.getAllRecords()
+
+    suspend fun getRecordById(id: Int): TaskRecord = recordDao.getRecordById(id)
 }

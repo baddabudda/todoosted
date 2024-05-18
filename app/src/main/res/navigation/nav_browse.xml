@@ -59,6 +59,15 @@
     <fragment
         android:id="@+id/recordListFragment"
         android:name="com.forgblord.todo_prototype.fragments.recordlist.RecordListFragment"
-        android:label="RecordListFragment" />
+        android:label="RecordListFragment" >
+        <action
+            android:id="@+id/action_recordList_to_recordDetail"
+            app:destination="@id/recordDetailFragment"
+            app:popUpTo="@id/recordListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.forgblord.todo_prototype.fragments.record_detail.RecordDetailFragment"
+        android:label="RecordDetailFragment" />
 
 </navigation>
