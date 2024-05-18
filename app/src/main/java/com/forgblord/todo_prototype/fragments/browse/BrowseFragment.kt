@@ -103,5 +103,9 @@ class BrowseFragment: Fragment() {
         binding.completed.setOnClickListener {
             findNavController().navigate(BrowseFragmentDirections.actionBrowseToCompleted())
         }
+
+        binding.trackReports.setOnClickListener {
+            findNavController().navigate(BrowseFragmentDirections.actionBrowseToRecordList())
+        }
     }
 }

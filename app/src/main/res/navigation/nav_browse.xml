@@ -26,6 +26,10 @@
                 app:argType="com.forgblord.todo_prototype.data.models.Project"
                 app:nullable="true" />
         </action>
+        <action
+            android:id="@+id/action_browse_to_recordList"
+            app:destination="@id/recordListFragment"
+            app:popUpTo="@id/browseFragment" />
     </fragment>
 
     <fragment
@@ -52,5 +56,9 @@
         tools:layout="@layout/fragment_tasklist"/>
 
     <include app:graph="@navigation/nav_project"/>
+    <fragment
+        android:id="@+id/recordListFragment"
+        android:name="com.forgblord.todo_prototype.fragments.recordlist.RecordListFragment"
+        android:label="RecordListFragment" />
 
 </navigation>

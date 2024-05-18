@@ -24,4 +24,5 @@ data class TimeRecord (
     var task_id: Int,
     val datetime_start: Date,
     val datetime_end: Date? = null,
+    val duration: Long? = null,
 )

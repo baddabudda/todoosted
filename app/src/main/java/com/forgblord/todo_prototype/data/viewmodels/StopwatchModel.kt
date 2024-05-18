@@ -105,11 +105,14 @@ class StopwatchModel(
             timer.cancel()
         }
 
-        resetTimeUnits()
         if (requireClose) {
+            val time_end = Date()
+            val time_dif = (time_end.time - _record.value!!.record.datetime_start.time) / 1000L
             println(_record.value!!.record)
-            closeRecord(_record.value!!.record.copy(datetime_end = Date()))
+            closeRecord(_record.value!!.record.copy(datetime_end = Date(), duration = time_dif))
         }
+
+        resetTimeUnits()
     }
 
     private fun resetTimeUnits() {
