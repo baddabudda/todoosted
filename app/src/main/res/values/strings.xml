@@ -43,4 +43,10 @@
 
     <string name="btn_save">Save</string>
     <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="dialog_timeset_header">Set time in 24-hour format</string>
+    <string name="dialog_timeset_hours">hh</string>
+    <string name="dialog_timeset_minutes">mm</string>
+    <string name="dialog_timeset_seconds">ss</string>
 </resources>

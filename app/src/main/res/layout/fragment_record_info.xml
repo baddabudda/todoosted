@@ -67,7 +67,9 @@
             android:layout_gravity="fill"
             android:gravity="center"
             android:padding="10dp"
-            tools:text="March, 31" />
+            tools:text="March, 31"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"/>
 
         <TextView
             android:id="@+id/tv_start_time"
@@ -78,7 +80,9 @@
             android:layout_gravity="fill"
             android:gravity="center"
             android:padding="10dp"
-            tools:text="00:00:00" />
+            tools:text="00:00:00"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,7 +104,9 @@
             android:layout_gravity="fill"
             android:gravity="center"
             android:padding="10dp"
-            tools:text="March, 31" />
+            tools:text="March, 31"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"/>
 
         <TextView
             android:id="@+id/tv_end_time"
@@ -111,7 +117,9 @@
             android:layout_gravity="fill"
             android:gravity="center"
             android:padding="10dp"
-            tools:text="00:00:00" />
+            tools:text="00:00:00"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"/>
     </GridLayout>
 
     <LinearLayout
