@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/browse"
+    app:startDestination="@+id/browseFragment">
+
+    <fragment
+        android:id="@+id/browseFragment"
+        android:name="com.forgblord.todo_prototype.fragments.browse.BrowseFragment"
+        android:label="Browse"
+        tools:layout="@layout/fragment_browse">
+        <action
+            android:id="@+id/action_browse_to_project"
+            app:destination="@id/projectFragment"
+            app:popUpTo="@id/browseFragment" />
+        <action
+            android:id="@+id/action_browse_to_completed"
+            app:destination="@id/completedFragment"
+            app:popUpTo="@id/browseFragment" />
+        <action
+            android:id="@+id/action_browse_to_addProject"
+            app:destination="@id/nav_project">
+            <argument
+                android:name="project"
+                app:argType="com.forgblord.todo_prototype.data.models.Project"
+                app:nullable="true" />
+        </action>
+        <action
+            android:id="@+id/action_browse_to_recordList"
+            app:destination="@id/recordListFragment"
+            app:popUpTo="@id/browseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.forgblord.todo_prototype.fragments.tasklist.ProjectFragment"
+        tools:layout="@layout/fragment_tasklist">
+        <argument
+            android:name="project"
+            app:argType="com.forgblord.todo_prototype.data.models.Project" />
+        <action
+            android:id="@+id/action_project_to_editflow"
+            app:destination="@+id/nav_project">
+            <argument
+                android:name="project"
+                app:argType="com.forgblord.todo_prototype.data.models.Project"
+                app:nullable="true" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/completedFragment"
+        android:name="com.forgblord.todo_prototype.fragments.tasklist.CompletedFragment"
+        android:label="Completed Tasks"
+        tools:layout="@layout/fragment_tasklist"/>
+
+    <include app:graph="@navigation/nav_project"/>
+    <fragment
+        android:id="@+id/recordListFragment"
+        android:name="com.forgblord.todo_prototype.fragments.recordlist.RecordListFragment"
+        android:label="RecordListFragment" >
+        <action
+            android:id="@+id/action_recordList_to_recordDetail"
+            app:destination="@id/recordDetailFragment"
+            app:popUpTo="@id/recordListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.forgblord.todo_prototype.fragments.record_detail.RecordDetailFragment"
+        android:label="RecordDetailFragment" />
+
+</navigation>

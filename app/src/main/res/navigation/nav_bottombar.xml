@@ -3,40 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_bottombar"
-    app:startDestination="@id/inbox">
+    app:startDestination="@+id/inbox">
 
-    <fragment
-        android:id="@+id/inbox"
-        android:name="com.forgblord.todo_prototype.InboxFragment"
-        android:label="Inbox" >
+    <action
+        android:id="@+id/open_task"
+        app:destination="@id/taskDetailDialog" />
+
+    <action
+        android:id="@+id/add_task"
+        app:destination="@id/addTaskDialog"/>
+
+    <action
+        android:id="@+id/start_track"
+        app:destination="@+id/track">
+    </action>
+
+    <include app:graph="@navigation/nav_inbox"/>
+    <include app:graph="@navigation/nav_today"/>
+    <include app:graph="@navigation/nav_track"/>
+    <include app:graph="@navigation/nav_browse"/>
+
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.forgblord.todo_prototype.fragments.datepicker.DatePickerFragment"
+        android:label="Set Date"
+        tools:layout="@layout/fragment_date_picker" >
+    </dialog>
+
+    <dialog
+        android:id="@+id/addTaskDialog"
+        android:name="com.forgblord.todo_prototype.fragments.add_task.AddTaskDialog"
+        android:label="AddTaskDialog" >
         <action
-            android:id="@+id/open_task"
-            app:destination="@id/taskDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/today"
-        android:name="com.forgblord.todo_prototype.TodayFragment"
-        android:label="Today" >
+            android:id="@+id/select_date"
+            app:destination="@id/datePickerFragment" />
         <action
-            android:id="@+id/open_task"
-            app:destination="@id/taskDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/track"
-        android:name="com.forgblord.todo_prototype.TrackFragment"
-        android:label="Track" >
-    </fragment>
-    <fragment
-        android:id="@+id/browse"
-        android:name="com.forgblord.todo_prototype.BrowseFragment"
-        android:label="Browse" />
-    <fragment
-        android:id="@+id/taskDetailFragment"
-        android:name="com.forgblord.todo_prototype.TaskDetailFragment"
-        android:label="Task" >
+            android:id="@+id/action_addTask_to_projectPicker"
+            app:destination="@id/projectPickerDialog" />
+        <action
+            android:id="@+id/action_addTask_to_priorityDialog"
+            app:destination="@id/priorityDialog" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/projectPickerDialog"
+        android:name="com.forgblord.todo_prototype.fragments.projectpicker.ProjectPickerDialog"
+        android:label="ProjectPickerDialog" />
+    <dialog
+        android:id="@+id/taskDetailDialog"
+        android:name="com.forgblord.todo_prototype.fragments.task_detail.TaskDetailDialog"
+        android:label="TaskDetailDialog">
         <argument
             android:name="taskId"
-            app:argType="java.util.UUID" />
-    </fragment>
+            app:argType="integer" />
+        <action
+            android:id="@+id/select_date"
+            app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/action_taskDetail_to_projectPicker"
+            app:destination="@id/projectPickerDialog" />
+    </dialog>
+    <dialog
+        android:id="@+id/priorityDialog"
+        android:name="com.forgblord.todo_prototype.fragments.dialogs.PriorityDialog"
+        android:label="PriorityDialog" />
 
 </navigation>

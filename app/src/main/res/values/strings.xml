@@ -1,13 +1,52 @@
 <resources>
     <string name="app_name">todo-prototype</string>
+
     <string name="inbox">Inbox</string>
     <string name="today">Today</string>
     <string name="track">Track</string>
     <string name="browse">Browse</string>
     <string name="settings">Settings</string>
+    <string name="completed">Completed</string>
+    <string name="trackhistory">Track reports</string>
+    <string name="projects">My Projects</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dummytask">Dummy task placeholder</string>
+    <string name="add_project">Add new project</string>
+    <string name="add_task">Add new task</string>
+
+    <string name="dummytask">Task name</string>
     <string name="dummydate">31 Mar 2024</string>
     <string name="dummysubtask">0/11</string>
     <string name="dummyproject">Project Name</string>
+
+    <string name="deadline_default">Due date</string>
+    <string name="menu_priority">Priority</string>
+    <string name="menu_priority_1">High Priority</string>
+    <string name="menu_priority_2">Medium Priority</string>
+    <string name="menu_priority_3">Low Priority</string>
+    <string name="menu_priority_4">None</string>
+
+    <string name="short_priority_1">High</string>
+    <string name="short_priority_2">Medium</string>
+    <string name="short_priority_3">Low</string>
+    <string name="short_priority_4">None</string>
+
+    <string name="stopwatch_task_none">No active task. Select task from project page to start tracking</string>
+    <string name="stopwatch_task_passed">Ready to track task with id %1$d</string>
+    <string name="stopwatch_task_tracking">Currently tracking : %1$s</string>
+    <string name="stopwatch_test_task_id">Task id is: %1$d</string>
+    <string name="stopwatch_test_record_id">Record id is: %1$d</string>
+
+    <string name="record_header_set">Set time period</string>
+    <string name="record_header_start">Start</string>
+    <string name="record_header_end">Stop</string>
+
+    <string name="btn_save">Save</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="dialog_timeset_header">Set time in 24-hour format</string>
+    <string name="dialog_timeset_hours">hh</string>
+    <string name="dialog_timeset_minutes">mm</string>
+    <string name="dialog_timeset_seconds">ss</string>
 </resources>

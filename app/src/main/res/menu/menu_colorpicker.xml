@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pick_magenta"
+        android:title="Magenta"/>
+    <item
+        android:id="@+id/pick_cyan"
+        android:title="Cyan"/>
+    <item
+        android:id="@+id/pick_purple"
+        android:title="Purple"/>
+    <item
+        android:id="@+id/pick_blue"
+        android:title="Blue"/>
+    <item
+        android:id="@+id/pick_orange"
+        android:title="Orange"/>
+    <item
+        android:id="@+id/pick_yellow"
+        android:title="Yellow"/>
+    <item
+        android:id="@+id/pick_red"
+        android:title="Red"/>
+    <item
+        android:id="@+id/pick_green"
+        android:title="Green"/>
+</menu>
